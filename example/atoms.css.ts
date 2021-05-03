@@ -15,7 +15,8 @@ export const [themeClass, vars] = createTheme({
     none: '0',
     small: '4px',
     medium: '8px',
-    large: '16px'
+    large: '16px',
+    extraLarge: '32px'
   },
   breakpoints: {
     mobile: '0',

@@ -1,0 +1,20 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"node start.js\" \"serve .\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "concurrently": "^6.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "serve": "^11.3.2"
+  }
+}

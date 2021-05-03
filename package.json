@@ -19,14 +19,11 @@
   "devDependencies": {
     "@radix-ui/react-polymorphic": "0.0.10",
     "@types/react": "^17.0.4",
-    "@vanilla-extract/css": "^0.4.1",
-    "@vanilla-extract/esbuild-plugin": "^0.2.1",
-    "@vanilla-extract/sprinkles": "^0.1.1",
     "esbuild": "^0.11.17",
     "react": "^17.0.2",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": ">=16.8.0"
   }
 }
