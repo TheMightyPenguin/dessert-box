@@ -14,7 +14,7 @@ Install the package:
 $ npm install dessert-box
 ```
 
-Have your atoms ready, and also export a flat array with all of the pieces that make up your atoms fn:
+Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready, and also export a flat array with all of the pieces that make up your atoms fn:
 
 ```js
 // atoms.css.ts
@@ -59,6 +59,7 @@ export const atoms = createAtomsFn(responsiveStyles, colorStyles);
 Now let's create our `<Box />` using these atoms:
 
 ```jsx
+// yourApp.ts
 const Box = createBox(atoms, usedProperties);
 
 const App = () => {
@@ -91,3 +92,7 @@ Thanks to [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/u
 Run `npm install` then `npm run build` in the root folder (the one with this README file).
 
 Then move into the example folder `cd example` and run `npm install` and `npm start`.
+
+#### How does it work?
+
+This works by depending on build-time generated CSS by [sprinkles](https://github.com/seek-oss/vanilla-extract/tree/3360bdfc9220024e7ffa49b3b198b72743d4e264/packages/sprinkles), and then using the `atomsFn` function to lookup classNames in runtime. So it does have a runtime footprint, but should be pretty minimal. I'm still experimenting to see if it's possible to remove that, but other approaches may lead to other constraints or similar runtime.
