@@ -1,0 +1,27 @@
+{
+  "name": "atomic-box",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
+    "emit-types": "tsc --project tsconfig.types.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@radix-ui/react-polymorphic": "0.0.10",
+    "@types/react": "^17.0.4",
+    "@vanilla-extract/css": "^0.4.1",
+    "@vanilla-extract/esbuild-plugin": "^0.2.1",
+    "@vanilla-extract/sprinkles": "^0.1.1",
+    "esbuild": "^0.11.17",
+    "react": "^17.0.2",
+    "typescript": "^4.2.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}
