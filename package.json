@@ -4,6 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheMightyPenguin/dessert-box.git",
+    "directory": "./"
+  },
   "scripts": {
     "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
     "emit-types": "tsc --project tsconfig.types.json"
