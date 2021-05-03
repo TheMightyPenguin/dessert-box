@@ -1,8 +1,10 @@
 # Dessert Box
 
-> The last `<Box />` you'll ever need.
+> Carefully packaged with sweets and atomic energy!
 
-A `<Box />` component to consume atoms created with https://github.com/seek-oss/vanilla-extract and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles).
+A `<Box />` component to consume atoms created with [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles).
+
+> Shout out to the team at Seek for making these awesome libraries!
 
 ## Usage
 
