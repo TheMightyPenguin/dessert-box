@@ -14,6 +14,8 @@ A `<Box />` component to consume atoms created with [vanilla-extract](https://gi
   - [How does it work?](#how-does-it-work)
   - [Thanks](#thanks)
 
+[Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
+
 ## Usage
 
 Install the package:
@@ -82,6 +84,8 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
   Link to example
 </Box>
 ```
+
+[Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
 ## API
 
