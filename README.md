@@ -24,8 +24,6 @@ Install the package:
 $ npm install dessert-box
 ```
 
-> [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/utilities/polymorphic) is installed to get propert type hints.
-
 Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready, and also export a flat array with all of the pieces that make up your atoms fn:
 
 ```js
