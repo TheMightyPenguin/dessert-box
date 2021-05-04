@@ -1,4 +1,4 @@
-# Dessert Box
+# 🍰 Dessert Box
 
 > Carefully packaged with sweets and atomic energy!
 
@@ -6,7 +6,7 @@ A `<Box />` component to consume atoms created with [vanilla-extract](https://gi
 
 > Shout out to the team at Seek for making these awesome libraries!
 
-- [Dessert Box](#dessert-box)
+- [🍰 Dessert Box](#-dessert-box)
   - [Usage](#usage)
   - [API](#api)
     - [createBox(atoms: AtomsFn)](#createboxatoms-atomsfn)
