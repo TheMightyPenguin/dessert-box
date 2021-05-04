@@ -62,6 +62,4 @@ const colorStyles = createAtomicStyles({
   }
 });
 
-export const usedProperties = [colorStyles, layoutStyles].flatMap(item => Object.keys(item));
-
 export const atoms = createAtomsFn(layoutStyles, colorStyles);

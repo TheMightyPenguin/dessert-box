@@ -1,4 +1,4 @@
-# Dessert Box
+# 🍰 Dessert Box
 
 > Carefully packaged with sweets and atomic energy!
 
@@ -6,15 +6,23 @@ A `<Box />` component to consume atoms created with [vanilla-extract](https://gi
 
 > Shout out to the team at Seek for making these awesome libraries!
 
+- [🍰 Dessert Box](#-dessert-box)
+  - [Usage](#usage)
+  - [API](#api)
+    - [createBox(atoms: AtomsFn)](#createboxatoms-atomsfn)
+    - [createBoxWithAtomsProp(atoms: AtomsFn)](#createboxwithatomspropatoms-atomsfn)
+  - [TypeScript](#typescript)
+  - [Running the example app](#running-the-example-app)
+  - [How does it work?](#how-does-it-work)
+  - [Thanks](#thanks)
+
 ## Usage
 
 Install the package:
 
 ```
-$ npm install dessert-box @radix-ui/react-polymorphic
+$ npm install dessert-box
 ```
-
-> [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/utilities/polymorphic) is installed to get propert type hints.
 
 Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready, and also export a flat array with all of the pieces that make up your atoms fn:
 
@@ -62,6 +70,7 @@ Now let's create our `<Box />` using these atoms:
 
 ```jsx
 // yourApp.ts
+import { createBox } from 'dessert-box';
 const Box = createBox(atoms, usedProperties);
 
 const App = () => {
@@ -83,18 +92,49 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
 </Box>
 ```
 
-### TypeScript
+## API
+
+### createBox(atoms: AtomsFn)
+
+Creates a `<Box />` component that takes atoms at the root level.
+
+```jsx
+import { createBox } from 'dessert-box';
+import { atoms } from './atoms.css';
+
+const box = createBox(atoms);
+
+<Box padding="small" />
+```
+
+### createBoxWithAtomsProp(atoms: AtomsFn)
+
+Creates a `<Box />` component that takes atoms as a prop called `atoms`.
+
+```jsx
+import { createBox } from 'dessert-box';
+import { atoms } from './atoms.css';
+
+const Box = createBoxWithAtomsProp(atoms);
+
+<Box atoms={{ padding: 'small' }} />
+```
+
+## TypeScript
 
 This library is fully typed, and the component supports the `as` prop, and will properly type props based on the type of element we use and also based on our atoms.
 
-Thanks to [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/utilities/polymorphic) for helping to achieve this :sparkles:.
-
-### Running the example app
+## Running the example app
 
 Run `npm install` then `npm run build` in the root folder (the one with this README file).
 
 Then move into the example folder `cd example` and run `npm install` and `npm start`.
 
-#### How does it work?
+## How does it work?
 
 This works by depending on build-time generated CSS by [sprinkles](https://github.com/seek-oss/vanilla-extract/tree/3360bdfc9220024e7ffa49b3b198b72743d4e264/packages/sprinkles), and then using the `atomsFn` function to lookup classNames in runtime. So it does have a runtime footprint, but should be pretty minimal. I'm still experimenting to see if it's possible to remove that, but other approaches may lead to other constraints or similar runtime.
+
+## Thanks
+
+- Thanks to the team at Seek for [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles), this would not be possible without these great libs and the technical feats they accomplish.
+- Thanks to the team at Modulz for [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/utilities/polymorphic). The component offers a great typed experience thanks to this.

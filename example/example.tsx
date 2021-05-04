@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createBox } from '../dist/index';
-import { themeClass, atoms, usedProperties } from './atoms.css';
+import { createBox, createBoxWithAtomsProp } from '../dist/index';
+import { themeClass, atoms } from './atoms.css';
 
-const Box = createBox(atoms, usedProperties);
+const Box = createBox(atoms);
+const BoxWithAtomsProp = createBoxWithAtomsProp(atoms);
 
 const App = () => {
   return (
@@ -26,6 +27,16 @@ const App = () => {
       </Box>
 
       <Box>Without atoms or className</Box>
+
+      <BoxWithAtomsProp
+        as="a"
+        href="https://google.com"
+        atoms={{
+          padding: { desktop: 'extraLarge', mobile: 'small' }
+        }}
+      >
+        With atoms as a prop
+      </BoxWithAtomsProp>
     </Box>
   );
 };

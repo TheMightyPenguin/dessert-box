@@ -14,7 +14,7 @@
     "@types/react-dom": "^17.0.3",
     "@vanilla-extract/css": "^0.4.1",
     "@vanilla-extract/esbuild-plugin": "^0.2.1",
-    "@vanilla-extract/sprinkles": "^0.1.1",
+    "@vanilla-extract/sprinkles": "^0.2.0",
     "concurrently": "^6.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
