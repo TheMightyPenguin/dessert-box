@@ -2,9 +2,7 @@
 
 > Carefully packaged with sweets and atomic energy!
 
-A `<Box />` component to consume atoms created with [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles).
-
-> Shout out to the team at Seek for making these awesome libraries!
+A `<Box />` component to consume atoms created with [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
 - [🍰 Dessert Box](#-dessert-box)
   - [Usage](#usage)
@@ -24,7 +22,7 @@ Install the package:
 $ npm install dessert-box
 ```
 
-Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready, and also export a flat array with all of the pieces that make up your atoms fn:
+Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready:
 
 ```js
 // atoms.css.ts
@@ -54,13 +52,6 @@ const colorStyles = createAtomicStyles({
   // ...
 });
 
-/**
- * Flat array including all property names used by our atoms
- */
-export const usedProperties = [colorStyles, layoutStyles].flatMap((item) =>
-  Object.keys(item)
-);
-
 export const atoms = createAtomsFn(responsiveStyles, colorStyles);
 ```
 
@@ -71,7 +62,7 @@ Now let's create our `<Box />` using these atoms:
 ```jsx
 // yourApp.ts
 import { createBox } from 'dessert-box';
-const Box = createBox(atoms, usedProperties);
+const Box = createBox(atoms);
 
 const App = () => {
   return <Box padding="large">Hello</Box>;
@@ -112,7 +103,7 @@ const box = createBox(atoms);
 Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 
 ```jsx
-import { createBox } from 'dessert-box';
+import { createBoxWithAtomsProp } from 'dessert-box';
 import { atoms } from './atoms.css';
 
 const Box = createBoxWithAtomsProp(atoms);
