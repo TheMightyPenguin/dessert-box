@@ -2,7 +2,9 @@
 
 > Carefully packaged with sweets and atomic energy!
 
-A `<Box />` component to consume atoms created with [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
+This library provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
+
+This works by consuming atoms created with [`vanilla-extract`](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
 
