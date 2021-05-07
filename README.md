@@ -4,6 +4,8 @@
 
 A `<Box />` component to consume atoms created with [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
+![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
+
 - [🍰 Dessert Box](#-dessert-box)
   - [Usage](#usage)
   - [API](#api)
