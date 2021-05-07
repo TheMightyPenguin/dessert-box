@@ -9,14 +9,13 @@ interface AtomsFnBase {
 export function createBox<AtomsFn extends AtomsFnBase>(atomsFn: AtomsFn) {
   type BoxProps = {
     as?: keyof JSX.IntrinsicElements;
-    children: any;
+    children?: React.ReactNode;
     className?: string;
   } & Parameters<AtomsFn>[0];
 
   function Box({
     as: Element = 'div',
     className,
-    children,
     ...props
   }: BoxProps) {
     let hasAtomProps = false;
@@ -42,9 +41,7 @@ export function createBox<AtomsFn extends AtomsFnBase>(atomsFn: AtomsFn) {
               }`
             : undefined
         }
-      >
-        {children}
-      </Element>
+      />
     );
   }
 
@@ -54,7 +51,7 @@ export function createBox<AtomsFn extends AtomsFnBase>(atomsFn: AtomsFn) {
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>(atomsFn: AtomsFn) {
   type BoxProps = {
     as?: keyof JSX.IntrinsicElements;
-    children: any;
+    children?: React.ReactNode;
     className?: string;
     atoms?: Parameters<AtomsFn>[0]
   };
@@ -62,7 +59,6 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>(atomsFn: Ato
   function Box({
     as: Element = 'div',
     className,
-    children,
     atoms,
     ...props
   }: BoxProps) {
@@ -78,9 +74,7 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>(atomsFn: Ato
               }`
             : undefined
         }
-      >
-        {children}
-      </Element>
+      />
     );
   }
 
