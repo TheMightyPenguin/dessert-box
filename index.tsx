@@ -45,7 +45,7 @@ export function createBox<AtomsFn extends AtomsFnBase>(atomsFn: AtomsFn) {
     );
   }
 
-  return Box as Polymorphic.ForwardRefComponent<'div', Omit<BoxProps, 'as'>>;
+  return Box as Polymorphic.ForwardRefComponent<keyof JSX.IntrinsicElements, Omit<BoxProps, 'as'>>;
 }
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>(atomsFn: AtomsFn) {
@@ -67,6 +67,7 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>(atomsFn: Ato
     return (
       <Element
         {...props}
+        // @ts-ignore
         className={
           hasAtomProps || className
             ? `${className ?? ''}${hasAtomProps && className ? ' ' : ''}${
@@ -78,5 +79,5 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>(atomsFn: Ato
     );
   }
 
-  return Box as Polymorphic.ForwardRefComponent<'div', Omit<BoxProps, 'as'>>;
+  return Box as Polymorphic.ForwardRefComponent<keyof JSX.IntrinsicElements, Omit<BoxProps, 'as'>>;
 }
