@@ -6,6 +6,23 @@ This library provides a zero-CSS-runtime `<Box />` component (similar to the one
 
 This works by consuming atoms created with [`vanilla-extract`](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
+```jsx
+import { createBox } from 'dessert-box';
+
+const Box = createBox(atoms);
+
+const App = () => {
+  return (
+    <Box
+      background="brand"
+      padding={{ desktop: 'large', mobile: 'small' }}
+    >
+      Hello
+    </Box>
+  );
+};
+```
+
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
 
 - [🍰 Dessert Box](#-dessert-box)
