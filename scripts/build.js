@@ -6,7 +6,7 @@ require('esbuild').build({
   outdir: 'dist',
   sourcemap: true,
   format: 'cjs',
-  target: ['es2019'],
+  target: ['es2018'],
   external: [
     ...Object.keys(pkg.dependencies || {}),
     ...Object.keys(pkg.peerDependencies || {}),
