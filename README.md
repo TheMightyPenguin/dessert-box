@@ -6,21 +6,30 @@ This library provides a zero-CSS-runtime `<Box />` component (similar to the one
 
 This works by consuming atoms created with [`vanilla-extract`](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
+Step 1, create your box:
+
 ```jsx
+// Box.tsx
 import { createBox } from 'dessert-box';
 
-const Box = createBox(atoms);
+const Box = createBox({ atoms });
 
-const App = () => {
+export default Box
+```
+
+Step 2, enjoy the sweetness:
+
+```jsx
+// OtherFileOrComponent.tsx
+import Box from './Box.ts'
+
+const MyComponent = () => {
   return (
-    <Box
-      background="brand"
-      padding={{ desktop: 'large', mobile: 'small' }}
-    >
-      Hello
+    <Box padding="large">
+      What a sweet treat!
     </Box>
-  );
-};
+  )
+}
 ```
 
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
@@ -28,8 +37,8 @@ const App = () => {
 - [🍰 Dessert Box](#-dessert-box)
   - [Usage](#usage)
   - [API](#api)
-    - [createBox(atoms: AtomsFn)](#createboxatoms-atomsfn)
-    - [createBoxWithAtomsProp(atoms: AtomsFn)](#createboxwithatomspropatoms-atomsfn)
+    - [createBox(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxoptions--atoms-atomsfn-defaultclassname-string-)
+    - [createBoxWithAtomsProp(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxwithatomspropoptions--atoms-atomsfn-defaultclassname-string-)
   - [TypeScript](#typescript)
   - [Running the example app](#running-the-example-app)
   - [How does it work?](#how-does-it-work)
@@ -85,7 +94,7 @@ Now let's create our `<Box />` using these atoms:
 ```jsx
 // yourApp.ts
 import { createBox } from 'dessert-box';
-const Box = createBox(atoms);
+const Box = createBox({ atoms });
 
 const App = () => {
   return <Box padding="large">Hello</Box>;
@@ -110,7 +119,7 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
 
 ## API
 
-### createBox(atoms: AtomsFn)
+### createBox(options: { atoms: AtomsFn, defaultClassName?: string }) 
 
 Creates a `<Box />` component that takes atoms at the root level.
 
@@ -118,12 +127,12 @@ Creates a `<Box />` component that takes atoms at the root level.
 import { createBox } from 'dessert-box';
 import { atoms } from './atoms.css';
 
-const box = createBox(atoms);
+const box = createBox({ atoms });
 
 <Box padding="small" />
 ```
 
-### createBoxWithAtomsProp(atoms: AtomsFn)
+### createBoxWithAtomsProp(options: { atoms: AtomsFn, defaultClassName?: string })
 
 Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 
@@ -131,7 +140,7 @@ Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 import { createBoxWithAtomsProp } from 'dessert-box';
 import { atoms } from './atoms.css';
 
-const Box = createBoxWithAtomsProp(atoms);
+const Box = createBoxWithAtomsProp({ atoms });
 
 <Box atoms={{ padding: 'small' }} />
 ```
