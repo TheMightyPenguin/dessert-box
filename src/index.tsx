@@ -1,5 +1,4 @@
 import React from "react";
-import type * as Polymorphic from "@radix-ui/react-polymorphic";
 import type { CreateBoxParams } from "./types";
 
 interface AtomsFnBase {
@@ -12,10 +11,11 @@ export function createBox<AtomsFn extends AtomsFnBase>({
   defaultClassName,
 }: CreateBoxParams<AtomsFn>) {
   type BoxProps = {
-    as?: keyof JSX.IntrinsicElements;
+    as?: React.ElementType;
     children?: React.ReactNode;
     className?: string;
-  } & Parameters<AtomsFn>[0];
+  } & Parameters<AtomsFn>[0] &
+    React.AllHTMLAttributes<HTMLElement>;
 
   const Box = React.forwardRef<HTMLElement, BoxProps>(
     ({ as: Element = "div", className, ...props }, ref) => {
@@ -23,14 +23,14 @@ export function createBox<AtomsFn extends AtomsFnBase>({
       let atomProps: Record<string, unknown> = {};
       let otherProps: Record<string, unknown> = {};
 
-      Object.entries(props).map(([name, value]) => {
-        if (atomsFn.properties.has(name)) {
+      for (const key in props) {
+        if (atomsFn.properties.has(key)) {
           hasAtomProps = true;
-          atomProps[name] = value;
+          atomProps[key] = props[key];
         } else {
-          otherProps[name] = value;
+          otherProps[key] = props[key];
         }
-      });
+      }
 
       return (
         <Element
@@ -48,10 +48,7 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     }
   );
 
-  return Box as Polymorphic.ForwardRefComponent<
-    keyof JSX.IntrinsicElements,
-    Omit<BoxProps, "as">
-  >;
+  return Box;
 }
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
@@ -59,19 +56,18 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
   defaultClassName,
 }: CreateBoxParams<AtomsFn>) {
   type BoxProps = {
-    as?: keyof JSX.IntrinsicElements;
+    as?: React.ElementType;
     children?: React.ReactNode;
     className?: string;
     atoms?: Parameters<AtomsFn>[0];
-  };
+  } & React.AllHTMLAttributes<HTMLElement>;
 
-  const Box = React.forwardRef<any, BoxProps>(
+  const Box = React.forwardRef<HTMLElement, BoxProps>(
     ({ as: Element = "div", className, atoms, ...props }, ref) => {
       const hasAtomProps = typeof atoms !== "undefined";
 
       return (
         <Element
-          // @ts-ignore
           {...props}
           ref={ref}
           className={
@@ -86,8 +82,5 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     }
   );
 
-  return Box as Polymorphic.ForwardRefComponent<
-    keyof JSX.IntrinsicElements,
-    Omit<BoxProps, "as">
-  >;
+  return Box;
 }

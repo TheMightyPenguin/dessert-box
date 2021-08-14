@@ -15,7 +15,7 @@ This works by consuming atoms created with [`vanilla-extract`](https://github.co
 import { createBox } from 'dessert-box';
 import { atoms } from './sprinkles.css';
 
-const Box = createBox({ atoms });
+const [Box] = createBox({ atoms });
 
 export default Box
 ```
@@ -179,7 +179,6 @@ This works by depending on build-time generated CSS by [sprinkles](https://githu
 ## Thanks
 
 - Thanks to the team at Seek for [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles), this would not be possible without these great libs and the technical feats they accomplish.
-- Thanks to the team at Modulz for [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/utilities/polymorphic). The component offers a great typed experience thanks to this.
 
 ## FAQ
 
