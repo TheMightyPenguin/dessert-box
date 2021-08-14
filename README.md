@@ -2,26 +2,29 @@
 
 > Carefully packaged with sweets and atomic energy!
 
+[Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
+
 This library provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
 
 This works by consuming atoms created with [`vanilla-extract`](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
-Step 1, create your box:
+1. Step 1, create your box with your `atoms` created with sprinkles:
 
-```jsx
+```tsx
 // Box.tsx
 import { createBox } from 'dessert-box';
+import { atoms } from './sprinkles.css';
 
 const Box = createBox({ atoms });
 
 export default Box
 ```
 
-Step 2, enjoy the sweetness:
+2. Step 2, import it enjoy the sweetness:
 
-```jsx
+```tsx
 // OtherFileOrComponent.tsx
-import Box from './Box.ts'
+import Box from './Box'
 
 const MyComponent = () => {
   return (
@@ -31,6 +34,8 @@ const MyComponent = () => {
   )
 }
 ```
+
+**Wondering why using a Box component may be a good idea? or what is a Box component? Check the [FAQ](#FAQ).**
 
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
 
@@ -43,6 +48,7 @@ const MyComponent = () => {
   - [Running the example app](#running-the-example-app)
   - [How does it work?](#how-does-it-work)
   - [Thanks](#thanks)
+  - [FAQ](#faq)
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
@@ -67,7 +73,12 @@ const space = {
   large: 16,
 };
 
-const responsiveStyles = createAtomicStyles({
+const colors = {
+  primary: 'blue',
+  // ...
+}
+
+const atomicStyles = createAtomicStyles({
   conditions: {
     mobile: {},
     tablet: { "@media": "screen and (min-width: 768px)" },
@@ -75,26 +86,32 @@ const responsiveStyles = createAtomicStyles({
   },
   properties: {
     padding: space,
+    backgroundColor: colors,
     // ...
   },
   // ...
 });
 
-const colorStyles = createAtomicStyles({
-  // ...
-});
-
-export const atoms = createAtomsFn(responsiveStyles, colorStyles);
+export const atoms = createAtomsFn(atomicStyles);
 ```
 
 > Check `sprinkles` [docs](https://github.com/seek-oss/vanilla-extract/tree/3360bdfc9220024e7ffa49b3b198b72743d4e264/packages/sprinkles#setup) for more context into how to create these atoms.
 
 Now let's create our `<Box />` using these atoms:
 
-```jsx
-// yourApp.ts
+```tsx
+// Box.ts
 import { createBox } from 'dessert-box';
+import { atoms } from './sprinkles.css';
+
 const Box = createBox({ atoms });
+
+export default Box
+```
+
+```tsx
+// otherFile.tsx
+import Box from './Box';
 
 const App = () => {
   return <Box padding="large">Hello</Box>;
@@ -163,3 +180,17 @@ This works by depending on build-time generated CSS by [sprinkles](https://githu
 
 - Thanks to the team at Seek for [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles), this would not be possible without these great libs and the technical feats they accomplish.
 - Thanks to the team at Modulz for [`@radix-ui/react-polymorphic`](https://radix-ui.com/primitives/docs/utilities/polymorphic). The component offers a great typed experience thanks to this.
+
+## FAQ
+
+* What is a Box component?
+
+> It's a generic element that allows you to prototype fast and takes a variety of styling props (think of exposing a lot of CSS attributes as props on a component).
+
+* Why should I use a Box component?
+
+> There are many versions and flavors of a Box component, some are more [flexible](https://chakra-ui.com/docs/layout/box), while others are more [restrictive](https://seek-oss.github.io/braid-design-system/components/Box). The Box in this library falls into the latter category (restrictive), and it's more geared towards being the a lower level API of your Design System (or serving as inspiration for it).
+
+I see the Box component as a primitive for consuming design tokens, giving you a nice balance between flexibility and constraints. You can use it as an lower level API to implement your other components (Buttons, Card, Layout components, ...), and also as a prototyping and general usage component. 
+
+As a prototyping tool, it allows you to use all of your design tokens to generate new designs and evaluate if you need to iterate on your foundations, or to validate they work for your use cases. For general usage you can still have the guarantee that users of your system won't do anything impossible (e.g.: using a value that is not part of the design tokens) but still have a productive experience implementing designs.

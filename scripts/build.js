@@ -1,7 +1,7 @@
 const pkg = require('../package.json');
 
 require('esbuild').build({
-  entryPoints: ['index.tsx'],
+  entryPoints: ['src/index.tsx'],
   bundle: true,
   outdir: 'dist',
   sourcemap: true,
