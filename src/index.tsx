@@ -50,7 +50,7 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     }
   );
 
-  return Box as React.ComponentType<BoxProps>;
+  return Box;
 }
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
