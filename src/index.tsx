@@ -6,6 +6,8 @@ interface AtomsFnBase {
   properties: Set<string>;
 }
 
+type KeyOfSet<S extends Set<unknown>> = S extends Set<infer K> ? K : never;
+
 export function createBox<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
   defaultClassName,
@@ -15,10 +17,10 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     children?: React.ReactNode;
     className?: string;
   } & Parameters<AtomsFn>[0] &
-    React.AllHTMLAttributes<HTMLElement>;
+    Omit<React.AllHTMLAttributes<HTMLElement>, "as" | "width" | "height">;
 
   const Box = React.forwardRef<HTMLElement, BoxProps>(
-    ({ as: Element = "div", className, ...props }, ref) => {
+    ({ as: Element = "div", className, ...props }: BoxProps, ref) => {
       let hasAtomProps = false;
       let atomProps: Record<string, unknown> = {};
       let otherProps: Record<string, unknown> = {};
@@ -48,7 +50,7 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     }
   );
 
-  return Box;
+  return Box as React.ComponentType<BoxProps>;
 }
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
@@ -60,7 +62,7 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     children?: React.ReactNode;
     className?: string;
     atoms?: Parameters<AtomsFn>[0];
-  } & React.AllHTMLAttributes<HTMLElement>;
+  } & Omit<React.AllHTMLAttributes<HTMLElement>, "as" | "width" | "height">;
 
   const Box = React.forwardRef<HTMLElement, BoxProps>(
     ({ as: Element = "div", className, atoms, ...props }, ref) => {
