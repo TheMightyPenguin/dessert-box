@@ -181,7 +181,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Text = ({ variant }: Props) => {
+const Text = ({ variant, children }: Props) => {
   return <Box {...variants[variant]}>{children}</Box>;
 };
 
