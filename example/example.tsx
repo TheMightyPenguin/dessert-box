@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createBox, createBoxWithAtomsProp } from "../dist/index";
 import { themeClass, atoms } from "./atoms.css";
+import Box from "./Box";
+import Text from "./Text";
 
-const Box = createBox({ atoms });
-const BoxWithAtomsProp = createBoxWithAtomsProp({ atoms });
+const { Box: BoxWithAtomsProp } = createBoxWithAtomsProp({ atoms });
 
 const Button = (props: { text: string } & React.ComponentProps<"button">) => {
   return <button {...props}>{props.text}</button>;
@@ -27,6 +28,10 @@ const App = () => {
       >
         With atoms
       </Box>
+
+      <Text variant="h1">H1 text</Text>
+      <Text variant="h2">H2 text</Text>
+      <Text variant="p">p text</Text>
 
       <Box
         as="a"

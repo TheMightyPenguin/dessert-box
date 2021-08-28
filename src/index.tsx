@@ -1,12 +1,10 @@
-import React from "react";
+import React, { createElement, forwardRef } from "react";
 import type { CreateBoxParams } from "./types";
 
 interface AtomsFnBase {
   (...args: any): string;
   properties: Set<string>;
 }
-
-type KeyOfSet<S extends Set<unknown>> = S extends Set<infer K> ? K : never;
 
 export function createBox<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
@@ -19,8 +17,8 @@ export function createBox<AtomsFn extends AtomsFnBase>({
   } & Parameters<AtomsFn>[0] &
     Omit<React.AllHTMLAttributes<HTMLElement>, "as" | "width" | "height">;
 
-  const Box = React.forwardRef<HTMLElement, BoxProps>(
-    ({ as: Element = "div", className, ...props }: BoxProps, ref) => {
+  const Box = forwardRef<HTMLElement, BoxProps>(
+    ({ as: element = "div", className, ...props }: BoxProps, ref) => {
       let hasAtomProps = false;
       let atomProps: Record<string, unknown> = {};
       let otherProps: Record<string, unknown> = {};
@@ -34,23 +32,26 @@ export function createBox<AtomsFn extends AtomsFnBase>({
         }
       }
 
-      return (
-        <Element
-          ref={ref}
-          {...otherProps}
-          className={
-            (hasAtomProps || className
-              ? `${className ?? ""}${hasAtomProps && className ? " " : ""}${
-                  hasAtomProps ? atomsFn(atomProps) : ""
-                }`
-              : undefined) + (defaultClassName ? ` ${defaultClassName}` : "")
-          }
-        />
-      );
+      return createElement(element, {
+        ref,
+        ...otherProps,
+        className:
+          (hasAtomProps || className
+            ? `${className ?? ""}${hasAtomProps && className ? " " : ""}${
+                hasAtomProps ? atomsFn(atomProps) : ""
+              }`
+            : undefined) + (defaultClassName ? ` ${defaultClassName}` : ""),
+      });
     }
   );
 
-  return Box;
+  function createVariants<VariantKeys extends string>(
+    variants: Record<VariantKeys, Parameters<AtomsFn>[0]>
+  ) {
+    return variants;
+  }
+
+  return { Box, createVariants };
 }
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
@@ -64,25 +65,28 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     atoms?: Parameters<AtomsFn>[0];
   } & Omit<React.AllHTMLAttributes<HTMLElement>, "as" | "width" | "height">;
 
-  const Box = React.forwardRef<HTMLElement, BoxProps>(
-    ({ as: Element = "div", className, atoms, ...props }, ref) => {
+  const Box = forwardRef<HTMLElement, BoxProps>(
+    ({ as: element = "div", className, atoms, ...props }, ref) => {
       const hasAtomProps = typeof atoms !== "undefined";
 
-      return (
-        <Element
-          {...props}
-          ref={ref}
-          className={
-            (hasAtomProps || className
-              ? `${className ?? ""}${hasAtomProps && className ? " " : ""}${
-                  hasAtomProps ? atomsFn(atoms) : ""
-                }`
-              : undefined) + (defaultClassName ? ` ${defaultClassName}` : "")
-          }
-        />
-      );
+      return createElement(element, {
+        ref,
+        ...props,
+        className:
+          (hasAtomProps || className
+            ? `${className ?? ""}${hasAtomProps && className ? " " : ""}${
+                hasAtomProps ? atomsFn(atoms) : ""
+              }`
+            : undefined) + (defaultClassName ? ` ${defaultClassName}` : ""),
+      });
     }
   );
 
-  return Box;
+  function createVariants<VariantKeys extends string>(
+    variants: Record<VariantKeys, Parameters<AtomsFn>[0]>
+  ) {
+    return variants;
+  }
+
+  return { Box, createVariants };
 }

@@ -11,17 +11,22 @@ export const [themeClass, vars] = createTheme({
   font: {
     body: "arial",
   },
+  fontSize: {
+    small: "12px",
+    medium: "16px",
+    large: "24px",
+    extraLarge: "32px",
+  },
+  fontWeight: {
+    "400": "400",
+    "600": "600",
+  },
   space: {
     none: "0",
     small: "4px",
     medium: "8px",
     large: "16px",
     extraLarge: "32px",
-  },
-  breakpoints: {
-    mobile: "0",
-    tablet: "768px",
-    desktop: "992px",
   },
 });
 
@@ -41,6 +46,8 @@ const layoutStyles = createAtomicStyles({
     paddingRight: vars.space,
     margin: vars.space,
     width: ["16px", "100%"],
+    fontSize: vars.fontSize,
+    fontWeight: vars.fontWeight,
     // etc.
   },
   shorthands: {

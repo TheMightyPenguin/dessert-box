@@ -8,14 +8,14 @@ This library provides a zero-CSS-runtime `<Box />` component (similar to the one
 
 This works by consuming atoms created with [`vanilla-extract`](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
 
-1. Step 1, create your box with your `atoms` created with sprinkles:
+1. Step 1, create your Box with your `atoms` created with sprinkles:
 
 ```tsx
 // Box.tsx
 import { createBox } from 'dessert-box';
 import { atoms } from './sprinkles.css';
 
-const [Box] = createBox({ atoms });
+const { Box } = createBox({ atoms });
 
 export default Box
 ```
@@ -37,14 +37,16 @@ const MyComponent = () => {
 
 **Wondering why using a Box component may be a good idea? or what is a Box component? Check the [FAQ](#FAQ).**
 
+> Pssst: We also support [variants, check it out!](#variants) :sparkles:
+
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
 
 - [🍰 Dessert Box](#-dessert-box)
   - [Usage](#usage)
+    - [Variants](#variants)
   - [API](#api)
     - [createBox(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxoptions--atoms-atomsfn-defaultclassname-string-)
     - [createBoxWithAtomsProp(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxwithatomspropoptions--atoms-atomsfn-defaultclassname-string-)
-  - [TypeScript](#typescript)
   - [Running the example app](#running-the-example-app)
   - [How does it work?](#how-does-it-work)
   - [Thanks](#thanks)
@@ -134,9 +136,63 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
+### Variants
+
+All of the `createBox` functions also return a `createVariants` function, with it you can group style props together and give it a name, and we call this grouping of styles a `variant`. For example, you could create a Text component like this:
+
+1. First define your Box using your atoms:
+
+```tsx
+// Box.tsx
+import { createBox } from 'dessert-box';
+import { atoms } from './sprinkles.css';
+
+// notice we export the createVariants function
+const { Box, createVariants } = createBox({ atoms });
+
+export default Box
+```
+
+2. Then use the `createVariants` function to create variants and apply them to your `Box`:
+
+```tsx
+// Text.tsx
+import { Box, createVariants } from "./Box";
+
+const variants = createVariants({
+  h1: {
+    fontSize: "extraLarge",
+    fontWeight: "600",
+  },
+  h2: {
+    fontSize: "large",
+    fontWeight: "400",
+  },
+  p: {
+    fontSize: {
+      desktop: "medium",
+      mobile: "large",
+    },
+  },
+});
+
+type Props = {
+  variant: keyof typeof variants;
+  children: React.ReactNode;
+};
+
+const Text = ({ variant }: Props) => {
+  return <Box {...variants[variant]}>{children}</Box>;
+};
+
+export default Text;
+```
+
+The createVariants function takes a `Record<string, YourAtomKeys>`, so you can map custom names to a custom group of your own atoms. This API is completely typed so you will get proper autocomplete.
+
 ## API
 
-### createBox(options: { atoms: AtomsFn, defaultClassName?: string }) 
+### createBox(options: { atoms: AtomsFn, defaultClassName?: string })
 
 Creates a `<Box />` component that takes atoms at the root level.
 
@@ -144,7 +200,7 @@ Creates a `<Box />` component that takes atoms at the root level.
 import { createBox } from 'dessert-box';
 import { atoms } from './atoms.css';
 
-const box = createBox({ atoms });
+const { Box, createVariants } = createBox({ atoms });
 
 <Box padding="small" />
 ```
@@ -157,14 +213,10 @@ Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 import { createBoxWithAtomsProp } from 'dessert-box';
 import { atoms } from './atoms.css';
 
-const Box = createBoxWithAtomsProp({ atoms });
+const { Box, createVariants } = createBoxWithAtomsProp({ atoms });
 
 <Box atoms={{ padding: 'small' }} />
 ```
-
-## TypeScript
-
-This library is fully typed, and the component supports the `as` prop, and will properly type props based on the type of element we use and also based on our atoms.
 
 ## Running the example app
 
@@ -190,6 +242,7 @@ This works by depending on build-time generated CSS by [sprinkles](https://githu
 
 > There are many versions and flavors of a Box component, some are more [flexible](https://chakra-ui.com/docs/layout/box), while others are more [restrictive](https://seek-oss.github.io/braid-design-system/components/Box). The Box in this library falls into the latter category (restrictive), and it's more geared towards being the a lower level API of your Design System (or serving as inspiration for it).
 
-I see the Box component as a primitive for consuming design tokens, giving you a nice balance between flexibility and constraints. You can use it as an lower level API to implement your other components (Buttons, Card, Layout components, ...), and also as a prototyping and general usage component. 
+This Box component is meant to be used as a primitive for consuming design tokens, giving you a nice balance between flexibility and constraints. You can use it as an lower level API to implement your other components (Buttons, Card, Layout components, ...), and also as a prototyping and general usage component:
 
-As a prototyping tool, it allows you to use all of your design tokens to generate new designs and evaluate if you need to iterate on your foundations, or to validate they work for your use cases. For general usage you can still have the guarantee that users of your system won't do anything impossible (e.g.: using a value that is not part of the design tokens) but still have a productive experience implementing designs.
+* As a prototyping tool, it allows you to use all of your design tokens to generate new designs and evaluate if you need to iterate on your foundations, or to validate if they work for your use cases.
+* For general usage you can still have the guarantee that users of your system won't do anything impossible (e.g.: using a value that is not part of the design tokens) but still have a productive experience working on UI.
