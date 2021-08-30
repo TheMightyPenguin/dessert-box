@@ -138,7 +138,7 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
 
 ### Variants
 
-All of the `createBox` functions also return a `createVariants` function, with it you can group style props together and give it a name, and we call this grouping of styles a `variant`. For example, you could create a Text component like this:
+All of the `createBox` functions also return a `createVariants` function, with it you can group style props together and give it a name, and we call this grouping of styles a `variant`. For example, you could create a Button component like this:
 
 1. First define your Box using your atoms:
 
@@ -156,36 +156,49 @@ export default Box
 2. Then use the `createVariants` function to create variants and apply them to your `Box`:
 
 ```tsx
-// Text.tsx
-import { Box, createVariants } from "./Box";
+// Button.tsx
+import { Box, createVariants } from "./Box"
 
-const variants = createVariants({
-  h1: {
-    fontSize: "extraLarge",
-    fontWeight: "600",
+const type = createVariants({
+  primary: {
+    background: 'blue',
   },
-  h2: {
-    fontSize: "large",
-    fontWeight: "400",
+  secondary: {
+    background: 'gray',
   },
-  p: {
-    fontSize: {
-      desktop: "medium",
-      mobile: "large",
-    },
+})
+
+// you can create as many variants as you want
+const sizes = createVariants({
+  md: {
+    fontSize: 'large',
   },
-});
+  lg: {
+    fontSize: 'extraLarge',
+  },
+})
 
 type Props = {
-  variant: keyof typeof variants;
   children: React.ReactNode;
-};
+  size?: keyof typeof sizes
+  variant?: keyof typeof variants
+  // More props...
+}
 
-const Text = ({ variant, children }: Props) => {
-  return <Box {...variants[variant]}>{children}</Box>;
-};
+export const Button = ({
+  children,
+  size = 'md',
+  variant = 'secondary',
+  // More props...
+}: Props) => {
+  return (
+    <Box as="button" {...sizes[size]} {...type[variant]}>
+      {children}
+    </Box>
+  )
+}
 
-export default Text;
+export default Button;
 ```
 
 The createVariants function takes a `Record<string, YourAtomKeys>`, so you can map custom names to a custom group of your own atoms. This API is completely typed so you will get proper autocomplete.

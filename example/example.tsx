@@ -4,12 +4,9 @@ import { createBox, createBoxWithAtomsProp } from "../dist/index";
 import { themeClass, atoms } from "./atoms.css";
 import Box from "./Box";
 import Text from "./Text";
+import Button from "./Button";
 
 const { Box: BoxWithAtomsProp } = createBoxWithAtomsProp({ atoms });
-
-const Button = (props: { text: string } & React.ComponentProps<"button">) => {
-  return <button {...props}>{props.text}</button>;
-};
 
 const AsBoxButton = (
   props: React.ComponentProps<typeof Box> & React.ComponentProps<typeof Button>
@@ -19,7 +16,9 @@ const App = () => {
   const [el, setEl] = React.useState<HTMLElement>();
   return (
     <Box className={themeClass}>
-      <AsBoxButton background="yellow" padding="extraLarge" text="Hello" />
+      <AsBoxButton background="yellow" padding="extraLarge">
+        Hello
+      </AsBoxButton>
       <Box
         as="a"
         ref={setEl}
@@ -32,6 +31,14 @@ const App = () => {
       <Text variant="h1">H1 text</Text>
       <Text variant="h2">H2 text</Text>
       <Text variant="p">p text</Text>
+
+      <Button size="lg" variant="primary">
+        Button
+      </Button>
+
+      <Button variant="secondary" size="lg">
+        Button
+      </Button>
 
       <Box
         as="a"
