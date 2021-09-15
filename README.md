@@ -1,12 +1,12 @@
 # 🍰 Dessert Box
 
-> Carefully packaged with sweets and atomic energy!
+A library to easily consume your design tokens from a React component.
+
+This library will make consuming your [sprinkles][sprinkles] from a react component a breeze. It provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
-This library provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
-
-This works by consuming atoms created with [`vanilla-extract`](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles). Shout out to the team at Seek for making these awesome libraries!
+This works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract]) and [`sprinkles`][sprinkles]. Shout out to the team at Seek for making these awesome libraries!
 
 1. Step 1, create your Box with your `atoms` created with sprinkles:
 
@@ -259,3 +259,6 @@ This Box component is meant to be used as a primitive for consuming design token
 
 * As a prototyping tool, it allows you to use all of your design tokens to generate new designs and evaluate if you need to iterate on your foundations, or to validate if they work for your use cases.
 * For general usage you can still have the guarantee that users of your system won't do anything impossible (e.g.: using a value that is not part of the design tokens) but still have a productive experience working on UI.
+
+[sprinkles]: https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles
+[vanilla-extract]: https://github.com/seek-oss/vanilla-extract
