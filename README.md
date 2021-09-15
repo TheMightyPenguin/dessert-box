@@ -1,12 +1,12 @@
 # 🍰 Dessert Box
 
-A library to easily consume your design tokens from a React component.
+A library to easily consume your design tokens from a React component, meant to be used with [vanilla-extract][vanilla-extract].
 
 This library will make consuming your [sprinkles][sprinkles] from a react component a breeze. It provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
-This works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract]) and [`sprinkles`][sprinkles]. Shout out to the team at Seek for making these awesome libraries!
+It works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract]) and [`sprinkles`][sprinkles]. Shout out to the team at Seek for making these awesome libraries!
 
 1. Step 1, create your Box with your `atoms` created with sprinkles:
 
@@ -15,7 +15,12 @@ This works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract
 import { createBox } from 'dessert-box';
 import { atoms } from './sprinkles.css';
 
-const { Box } = createBox({ atoms });
+const { Box } = createBox({
+  atoms,
+  // optional: pass your CSS reset className here
+  // useful if you want to scope your reset to your Box element
+  defaultClassName: 'resetClassName'
+});
 
 export default Box
 ```
@@ -37,7 +42,7 @@ const MyComponent = () => {
 
 **Wondering why using a Box component may be a good idea? or what is a Box component? Check the [FAQ](#FAQ).**
 
-> Pssst: We also support [variants, check it out!](#variants) :sparkles:
+> Wondering how to use `variants` with this library? Check out the [variants](#variants) section.
 
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
 
@@ -138,61 +143,51 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
 
 ### Variants
 
-All of the `createBox` functions also return a `createVariants` function, with it you can group style props together and give it a name, and we call this grouping of styles a `variant`. For example, you could create a Button component like this:
+The official [@vanilla-extract/recipes][recipes] package has an excelent API for dealing with variants, this can be combined with our `Box` component to create [variant-based components](https://ped.ro/blog/variant-driven-components):
 
-1. First define your Box using your atoms:
+NOTE: (Assuming you already have created your `Box` component following the example above).
+
+1. First define your recipe using the `recipe` function:
 
 ```tsx
-// Box.tsx
-import { createBox } from 'dessert-box';
-import { atoms } from './sprinkles.css';
+// Button.css.ts
+import { recipe } from "@vanilla-extract/recipes";
+import { atoms } from "../atoms.css";
 
-// notice we export the createVariants function
-const { Box, createVariants } = createBox({ atoms });
+export const buttonRecipe = recipe({
+  variants: {
+    kind: {
+      primary: atoms({ background: "blue50" }),
+      secondary: atoms({ background: "yellow" }),
+    },
+    size: {
+      md: atoms({ fontSize: "large" }),
+      lg: atoms({ fontSize: "extraLarge" }),
+    },
+  },
+});
 
-export default Box
+export type ButtonVariants = Parameters<typeof buttonRecipe>[0];
 ```
 
-2. Then use the `createVariants` function to create variants and apply them to your `Box`:
+2. Then use the `recipes` function to create variants and apply them to your `Box`:
 
 ```tsx
 // Button.tsx
-import { Box, createVariants } from "./Box"
-
-const type = createVariants({
-  primary: {
-    background: 'blue',
-  },
-  secondary: {
-    background: 'gray',
-  },
-})
-
-// you can create as many variants as you want
-const sizes = createVariants({
-  md: {
-    fontSize: 'large',
-  },
-  lg: {
-    fontSize: 'extraLarge',
-  },
-})
+import { Box } from "./Box"
+import { buttonRecipe, ButtonVariants } from "./Button.css";
 
 type Props = {
   children: React.ReactNode;
-  size?: keyof typeof sizes
-  variant?: keyof typeof variants
-  // More props...
-}
+} & ButtonVariants;
 
 export const Button = ({
   children,
   size = 'md',
-  variant = 'secondary',
-  // More props...
+  kind = 'secondary',
 }: Props) => {
   return (
-    <Box as="button" {...sizes[size]} {...type[variant]}>
+    <Box as="button" className={buttonRecipe({ size, kind })}>
       {children}
     </Box>
   )
@@ -201,7 +196,7 @@ export const Button = ({
 export default Button;
 ```
 
-The createVariants function takes a `Record<string, YourAtomKeys>`, so you can map custom names to a custom group of your own atoms. This API is completely typed so you will get proper autocomplete.
+For more context, refer to [@vanilla-extract/recipe][recipes] or feel free [to open an issue in this project](https://github.com/TheMightyPenguin/dessert-box/issues/new) if the integration is not working as you'd expect!
 
 ## API
 
@@ -213,7 +208,7 @@ Creates a `<Box />` component that takes atoms at the root level.
 import { createBox } from 'dessert-box';
 import { atoms } from './atoms.css';
 
-const { Box, createVariants } = createBox({ atoms });
+const Box = createBox({ atoms });
 
 <Box padding="small" />
 ```
@@ -226,7 +221,7 @@ Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 import { createBoxWithAtomsProp } from 'dessert-box';
 import { atoms } from './atoms.css';
 
-const { Box, createVariants } = createBoxWithAtomsProp({ atoms });
+const Box = createBoxWithAtomsProp({ atoms });
 
 <Box atoms={{ padding: 'small' }} />
 ```
@@ -262,3 +257,4 @@ This Box component is meant to be used as a primitive for consuming design token
 
 [sprinkles]: https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles
 [vanilla-extract]: https://github.com/seek-oss/vanilla-extract
+[recipes]: https://github.com/seek-oss/vanilla-extract#recipes-api

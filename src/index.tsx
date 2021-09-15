@@ -9,7 +9,7 @@ interface AtomsFnBase {
 type HTMLProperties = Omit<
   React.AllHTMLAttributes<HTMLElement>,
   "as" | "color" | "height" | "width"
->
+>;
 
 export function createBox<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
@@ -19,7 +19,8 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     as?: React.ElementType;
     children?: React.ReactNode;
     className?: string;
-  } & Parameters<AtomsFn>[0] & HTMLProperties;
+  } & Parameters<AtomsFn>[0] &
+    HTMLProperties;
 
   const Box = forwardRef<HTMLElement, BoxProps>(
     ({ as: element = "div", className, ...props }: BoxProps, ref) => {
@@ -49,13 +50,7 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     }
   );
 
-  function createVariants<VariantKeys extends string>(
-    variants: Record<VariantKeys, Parameters<AtomsFn>[0]>
-  ) {
-    return variants;
-  }
-
-  return { Box, createVariants };
+  return Box;
 }
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
@@ -86,11 +81,5 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     }
   );
 
-  function createVariants<VariantKeys extends string>(
-    variants: Record<VariantKeys, Parameters<AtomsFn>[0]>
-  ) {
-    return variants;
-  }
-
-  return { Box, createVariants };
+  return Box;
 }
