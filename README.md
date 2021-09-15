@@ -106,7 +106,7 @@ Now let's create our `<Box />` using these atoms:
 import { createBox } from 'dessert-box';
 import { atoms } from './sprinkles.css';
 
-const Box = createBox({ atoms });
+const { Box } = createBox({ atoms });
 
 export default Box
 ```
