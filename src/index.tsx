@@ -37,15 +37,16 @@ export function createBox<AtomsFn extends AtomsFnBase>({
         }
       }
 
+      const classes = [
+        defaultClassName,
+        className,
+        hasAtomProps && atomsFn(atomProps),
+      ].filter(Boolean);
+
       return createElement(element, {
         ref,
         ...otherProps,
-        className:
-          (hasAtomProps || className
-            ? `${className ?? ""}${hasAtomProps && className ? " " : ""}${
-                hasAtomProps ? atomsFn(atomProps) : ""
-              }`
-            : undefined) + (defaultClassName ? ` ${defaultClassName}` : ""),
+        className: classes.length === 0 ? undefined : classes.join(" "),
       });
     }
   );
