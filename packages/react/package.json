@@ -1,0 +1,29 @@
+{
+  "name": "@dessert-box/react",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/dessert-box-react.cjs.js",
+  "module": "dist/dessert-box-react.esm.js",
+  "types": "dist/dessert-box-react.cjs.d.ts",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheMightyPenguin/dessert-box.git",
+    "directory": "./"
+  },
+  "scripts": {
+    "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
+    "emit-types": "tsc --project tsconfig.types.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@dessert-box/core": "^0.1.0",
+    "@types/react": "^17.0.4",
+    "react": "^17.0.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}
