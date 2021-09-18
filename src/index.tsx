@@ -69,15 +69,16 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     ({ as: element = "div", className, atoms, ...props }, ref) => {
       const hasAtomProps = typeof atoms !== "undefined";
 
+      const classes = [
+        defaultClassName,
+        className,
+        hasAtomProps && atomsFn(atoms),
+      ].filter(Boolean);
+
       return createElement(element, {
         ref,
         ...props,
-        className:
-          (hasAtomProps || className
-            ? `${className ?? ""}${hasAtomProps && className ? " " : ""}${
-                hasAtomProps ? atomsFn(atoms) : ""
-              }`
-            : undefined) + (defaultClassName ? ` ${defaultClassName}` : ""),
+        className: classes.length === 0 ? undefined : classes.join(" "),
       });
     }
   );
