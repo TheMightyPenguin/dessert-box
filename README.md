@@ -12,7 +12,7 @@ It works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract])
 
 ```tsx
 // Box.tsx
-import { createBox } from 'dessert-box';
+import { createBox } from '@dessert-box/react';
 import { atoms } from './sprinkles.css';
 
 const { Box } = createBox({
@@ -64,7 +64,7 @@ const MyComponent = () => {
 Install the package:
 
 ```
-$ npm install dessert-box
+$ npm install @dessert-box/react
 ```
 
 Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready:
@@ -108,7 +108,7 @@ Now let's create our `<Box />` using these atoms:
 
 ```tsx
 // Box.ts
-import { createBox } from 'dessert-box';
+import { createBox } from '@dessert-box/react';
 import { atoms } from './sprinkles.css';
 
 const { Box } = createBox({ atoms });
@@ -205,7 +205,7 @@ For more context, refer to [@vanilla-extract/recipe][recipes] or feel free [to o
 Creates a `<Box />` component that takes atoms at the root level.
 
 ```jsx
-import { createBox } from 'dessert-box';
+import { createBox } from '@dessert-box/react';
 import { atoms } from './atoms.css';
 
 const Box = createBox({ atoms });
@@ -218,7 +218,7 @@ const Box = createBox({ atoms });
 Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 
 ```jsx
-import { createBoxWithAtomsProp } from 'dessert-box';
+import { createBoxWithAtomsProp } from '@dessert-box/react';
 import { atoms } from './atoms.css';
 
 const Box = createBoxWithAtomsProp({ atoms });
