@@ -945,6 +945,11 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
+"@dessert-box/react@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@dessert-box/react/-/react-0.1.0.tgz#369a8953473a502ffd198f607c44ea4413c115a5"
+  integrity sha512-k6sI3oDwGxAmfo5sqPwU+KgBflqVZ55kLglMbtaHZw2xr7LIJDPmLJovQ+hz+sZ1Gd6TfC/dcArDi+w7Mwc0dQ==
+
 "@emotion/hash@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
