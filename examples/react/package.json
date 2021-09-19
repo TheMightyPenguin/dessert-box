@@ -1,8 +1,9 @@
 {
-  "name": "example",
+  "name": "dessert-box-example-react",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
+  "main": "example.tsx",
   "author": "Victor Tortolero <victormtortolero@gmail.com>",
   "scripts": {
     "start": "concurrently \"node start.js\" \"serve .\""
