@@ -2,6 +2,7 @@
   "name": "@dessert-box/core",
   "version": "0.1.0",
   "description": "",
+  "author": "Victor Tortolero <victormtortolero@gmail.com>",
   "main": "dist/dessert-box-core.cjs.js",
   "module": "dist/dessert-box-core.esm.js",
   "types": "dist/dessert-box-core.cjs.d.ts",
@@ -16,6 +17,5 @@
     "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
     "emit-types": "tsc --project tsconfig.types.json"
   },
-  "keywords": [],
-  "author": ""
+  "keywords": []
 }

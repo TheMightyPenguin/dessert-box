@@ -11,7 +11,8 @@
     "postinstall": "yarn dev"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "preconstruct": {
     "packages": [

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createBox, createBoxWithAtomsProp } from "../dist/index";
+import { createBox, createBoxWithAtomsProp } from "@dessert-box/react";
 import { themeClass, atoms } from "./atoms.css";
 import Box from "./Box";
 import Text from "./Text/Text";
