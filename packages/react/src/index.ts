@@ -2,7 +2,7 @@ import React, { createElement, forwardRef } from "react";
 import {
   AtomsFnBase,
   extractAtomsFromProps,
-  getClassName,
+  composeClassNames,
 } from "@dessert-box/core";
 import type { CreateBoxParams } from "./types";
 
@@ -32,12 +32,11 @@ export function createBox<AtomsFn extends AtomsFnBase>({
       return createElement(element, {
         ref,
         ...otherProps,
-        className: getClassName({
-          hasAtomProps,
+        className: composeClassNames(
           className,
-          atomicClasses: atomsFn(atomProps),
-          defaultClassName,
-        }),
+          atomsFn(atomProps),
+          defaultClassName
+        ),
       });
     }
   );
@@ -63,12 +62,11 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
       return createElement(element, {
         ref,
         ...props,
-        className: getClassName({
-          hasAtomProps,
+        className: composeClassNames(
           className,
-          atomicClasses: atomsFn(atoms),
-          defaultClassName,
-        }),
+          atomsFn(atoms),
+          defaultClassName
+        ),
       });
     }
   );

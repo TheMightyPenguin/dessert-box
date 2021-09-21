@@ -3,23 +3,14 @@ export interface AtomsFnBase {
   properties: Set<string>;
 }
 
-type GetClassNameOptions = {
-  className?: string;
-  atomicClasses?: string;
-  defaultClassName?: string;
-};
-
-export function getClassName({
-  className,
-  atomicClasses,
-  defaultClassName,
-}: GetClassNameOptions) {
-  const classes = [
-    defaultClassName,
-    className,
-    atomicClasses,
-  ].filter(Boolean) as Array<string>;
-
+export function composeClassNames(...classNames: Array<string | undefined>) {
+  const classes = classNames
+    .filter((className) => {
+      return Boolean(className) && className !== " ";
+    })
+    .map((className) => {
+      return className?.toString().trim();
+    }) as Array<string>;
   return classes.length === 0 ? undefined : classes.join(" ");
 }
 
