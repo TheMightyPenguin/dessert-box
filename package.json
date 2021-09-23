@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "preconstruct dev",
+    "watch": "preconstruct watch",
     "build": "preconstruct build",
     "release": "yarn build && npm publish",
     "test": "jest",
