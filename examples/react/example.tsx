@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { createBox, createBoxWithAtomsProp } from "@dessert-box/react";
-import { themeClass, atoms } from "./atoms.css";
-import Box from "./Box";
-import Text from "./Text/Text";
-import Button from "./Button/Button";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createBox, createBoxWithAtomsProp } from '@dessert-box/react';
+import { themeClass, atoms } from './atoms.css';
+import Box from './Box';
+import Text from './Text/Text';
+import Button from './Button/Button';
 
 const BoxWithAtomsProp = createBoxWithAtomsProp({ atoms });
 
 const AsBoxButton = (
-  props: React.ComponentProps<typeof Box> & React.ComponentProps<typeof Button>
+  props: React.ComponentProps<typeof Box> & React.ComponentProps<typeof Button>,
 ) => <Box as={Button} {...props} />;
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
         as="a"
         ref={setEl}
         href="https://google.com"
-        padding={{ desktop: "extraLarge", mobile: "small" }}
+        padding={{ desktop: 'extraLarge', mobile: 'small' }}
       >
         With atoms
       </Box>
@@ -44,7 +44,7 @@ const App = () => {
       <Box
         as="a"
         href="https://google.com"
-        padding={{ desktop: "extraLarge", mobile: "small" }}
+        padding={{ desktop: 'extraLarge', mobile: 'small' }}
         className="custom_class"
       >
         With atoms + className
@@ -56,7 +56,7 @@ const App = () => {
         as="a"
         href="https://google.com"
         atoms={{
-          padding: { desktop: "extraLarge", mobile: "small" },
+          padding: { desktop: 'extraLarge', mobile: 'small' },
         }}
       >
         With atoms as a prop
@@ -65,7 +65,7 @@ const App = () => {
   );
 };
 
-const container = document.createElement("div");
+const container = document.createElement('div');
 document.body.appendChild(container);
 
 ReactDOM.render(<App />, container);

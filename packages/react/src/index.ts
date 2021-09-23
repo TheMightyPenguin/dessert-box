@@ -1,14 +1,14 @@
-import React, { createElement, forwardRef } from "react";
+import React, { createElement, forwardRef } from 'react';
 import {
   AtomsFnBase,
   extractAtomsFromProps,
   composeClassNames,
-} from "@dessert-box/core";
-import type { CreateBoxParams } from "./types";
+} from '@dessert-box/core';
+import type { CreateBoxParams } from './types';
 
 type HTMLProperties = Omit<
   React.AllHTMLAttributes<HTMLElement>,
-  "as" | "color" | "height" | "width"
+  'as' | 'color' | 'height' | 'width'
 >;
 
 export function createBox<AtomsFn extends AtomsFnBase>({
@@ -23,10 +23,10 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     HTMLProperties;
 
   const Box = forwardRef<HTMLElement, BoxProps>(
-    ({ as: element = "div", className, ...props }: BoxProps, ref) => {
+    ({ as: element = 'div', className, ...props }: BoxProps, ref) => {
       const { hasAtomProps, atomProps, otherProps } = extractAtomsFromProps(
         props,
-        atomsFn
+        atomsFn,
       );
 
       return createElement(element, {
@@ -35,10 +35,10 @@ export function createBox<AtomsFn extends AtomsFnBase>({
         className: composeClassNames(
           className,
           atomsFn(atomProps),
-          defaultClassName
+          defaultClassName,
         ),
       });
-    }
+    },
   );
 
   return Box;
@@ -56,8 +56,8 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
   } & HTMLProperties;
 
   const Box = forwardRef<HTMLElement, BoxProps>(
-    ({ as: element = "div", className, atoms, ...props }, ref) => {
-      const hasAtomProps = typeof atoms !== "undefined";
+    ({ as: element = 'div', className, atoms, ...props }, ref) => {
+      const hasAtomProps = typeof atoms !== 'undefined';
 
       return createElement(element, {
         ref,
@@ -65,10 +65,10 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
         className: composeClassNames(
           className,
           atomsFn(atoms),
-          defaultClassName
+          defaultClassName,
         ),
       });
-    }
+    },
   );
 
   return Box;

@@ -19,25 +19,21 @@ const { Box } = createBox({
   atoms,
   // optional: pass your CSS reset className here
   // useful if you want to scope your reset to your Box element
-  defaultClassName: 'resetClassName'
+  defaultClassName: 'resetClassName',
 });
 
-export default Box
+export default Box;
 ```
 
 2. Step 2, import it enjoy the sweetness:
 
 ```tsx
 // OtherFileOrComponent.tsx
-import Box from './Box'
+import Box from './Box';
 
 const MyComponent = () => {
-  return (
-    <Box padding="large">
-      What a sweet treat!
-    </Box>
-  )
-}
+  return <Box padding="large">What a sweet treat!</Box>;
+};
 ```
 
 **Wondering why using a Box component may be a good idea? or what is a Box component? Check the [FAQ](#FAQ).**
@@ -71,7 +67,7 @@ Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`s
 
 ```js
 // atoms.css.ts
-import { createAtomicStyles, createAtomsFn } from "@vanilla-extract/sprinkles";
+import { createAtomicStyles, createAtomsFn } from '@vanilla-extract/sprinkles';
 
 const space = {
   none: 0,
@@ -83,13 +79,13 @@ const space = {
 const colors = {
   primary: 'blue',
   // ...
-}
+};
 
 const atomicStyles = createAtomicStyles({
   conditions: {
     mobile: {},
-    tablet: { "@media": "screen and (min-width: 768px)" },
-    desktop: { "@media": "screen and (min-width: 1024px)" },
+    tablet: { '@media': 'screen and (min-width: 768px)' },
+    desktop: { '@media': 'screen and (min-width: 1024px)' },
   },
   properties: {
     padding: space,
@@ -113,7 +109,7 @@ import { atoms } from './sprinkles.css';
 
 const { Box } = createBox({ atoms });
 
-export default Box
+export default Box;
 ```
 
 ```tsx
@@ -128,7 +124,7 @@ const App = () => {
 Notice we can pass every property, shorthand, or condition we can normally pass to our `atomsFn` function. For example, we could leverage the conditions for responsive design we have here:
 
 ```jsx
-<Box padding={{ mobile: "none", tablet: "small", desktop: "large" }} />
+<Box padding={{ mobile: 'none', tablet: 'small', desktop: 'large' }} />
 ```
 
 If you need to render a tag different than a `div`, you can use the `as` prop:
@@ -151,18 +147,18 @@ NOTE: (Assuming you already have created your `Box` component following the exam
 
 ```tsx
 // Button.css.ts
-import { recipe } from "@vanilla-extract/recipes";
-import { atoms } from "../atoms.css";
+import { recipe } from '@vanilla-extract/recipes';
+import { atoms } from '../atoms.css';
 
 export const buttonRecipe = recipe({
   variants: {
     kind: {
-      primary: atoms({ background: "blue50" }),
-      secondary: atoms({ background: "yellow" }),
+      primary: atoms({ background: 'blue50' }),
+      secondary: atoms({ background: 'yellow' }),
     },
     size: {
-      md: atoms({ fontSize: "large" }),
-      lg: atoms({ fontSize: "extraLarge" }),
+      md: atoms({ fontSize: 'large' }),
+      lg: atoms({ fontSize: 'extraLarge' }),
     },
   },
 });
@@ -174,8 +170,8 @@ export type ButtonVariants = Parameters<typeof buttonRecipe>[0];
 
 ```tsx
 // Button.tsx
-import { Box } from "./Box"
-import { buttonRecipe, ButtonVariants } from "./Button.css";
+import { Box } from './Box';
+import { buttonRecipe, ButtonVariants } from './Button.css';
 
 type Props = {
   children: React.ReactNode;
@@ -190,8 +186,8 @@ export const Button = ({
     <Box as="button" className={buttonRecipe({ size, kind })}>
       {children}
     </Box>
-  )
-}
+  );
+};
 
 export default Button;
 ```
@@ -210,7 +206,7 @@ import { atoms } from './atoms.css';
 
 const Box = createBox({ atoms });
 
-<Box padding="small" />
+<Box padding="small" />;
 ```
 
 ### createBoxWithAtomsProp(options: { atoms: AtomsFn, defaultClassName?: string })
@@ -223,7 +219,7 @@ import { atoms } from './atoms.css';
 
 const Box = createBoxWithAtomsProp({ atoms });
 
-<Box atoms={{ padding: 'small' }} />
+<Box atoms={{ padding: 'small' }} />;
 ```
 
 ## Running the example app
@@ -242,18 +238,18 @@ This works by depending on build-time generated CSS by [sprinkles](https://githu
 
 ## FAQ
 
-* What is a Box component?
+- What is a Box component?
 
 > It's a generic element that allows you to prototype fast and takes a variety of styling props (think of exposing a lot of CSS attributes as props on a component).
 
-* Why should I use a Box component?
+- Why should I use a Box component?
 
 > There are many versions and flavors of a Box component, some are more [flexible](https://chakra-ui.com/docs/layout/box), while others are more [restrictive](https://seek-oss.github.io/braid-design-system/components/Box). The Box in this library falls into the latter category (restrictive), and it's more geared towards being the a lower level API of your Design System (or serving as inspiration for it).
 
 This Box component is meant to be used as a primitive for consuming design tokens, giving you a nice balance between flexibility and constraints. You can use it as an lower level API to implement your other components (Buttons, Card, Layout components, ...), and also as a prototyping and general usage component:
 
-* As a prototyping tool, it allows you to use all of your design tokens to generate new designs and evaluate if you need to iterate on your foundations, or to validate if they work for your use cases.
-* For general usage you can still have the guarantee that users of your system won't do anything impossible (e.g.: using a value that is not part of the design tokens) but still have a productive experience working on UI.
+- As a prototyping tool, it allows you to use all of your design tokens to generate new designs and evaluate if you need to iterate on your foundations, or to validate if they work for your use cases.
+- For general usage you can still have the guarantee that users of your system won't do anything impossible (e.g.: using a value that is not part of the design tokens) but still have a productive experience working on UI.
 
 [sprinkles]: https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles
 [vanilla-extract]: https://github.com/seek-oss/vanilla-extract

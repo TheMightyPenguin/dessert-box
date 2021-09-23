@@ -6,17 +6,17 @@ export interface AtomsFnBase {
 export function composeClassNames(...classNames: Array<string | undefined>) {
   const classes = classNames
     .filter((className) => {
-      return Boolean(className) && className !== " ";
+      return Boolean(className) && className !== ' ';
     })
     .map((className) => {
       return className?.toString().trim();
     }) as Array<string>;
-  return classes.length === 0 ? undefined : classes.join(" ");
+  return classes.length === 0 ? undefined : classes.join(' ');
 }
 
 export function extractAtomsFromProps<AtomsFn extends AtomsFnBase>(
   props: any,
-  atomsFn: AtomsFn
+  atomsFn: AtomsFn,
 ) {
   let hasAtomProps = false;
   let atomProps: Record<string, unknown> = {};

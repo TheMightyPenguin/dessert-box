@@ -1,6 +1,6 @@
-import React from "react";
-import { buttonRecipe, ButtonVariants } from "./Button.css";
-import { Box } from "../Box";
+import React from 'react';
+import { buttonRecipe, ButtonVariants } from './Button.css';
+import { Box } from '../Box';
 
 type Props = {
   children: React.ReactNode;
@@ -8,8 +8,8 @@ type Props = {
 
 export const Button = ({
   children,
-  size = "md",
-  kind = "secondary",
+  size = 'md',
+  kind = 'secondary',
 }: Props) => {
   return (
     <Box as="button" className={buttonRecipe({ size, kind })}>

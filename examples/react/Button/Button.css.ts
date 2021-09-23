@@ -1,15 +1,15 @@
-import { recipe } from "@vanilla-extract/recipes";
-import { atoms } from "../atoms.css";
+import { recipe } from '@vanilla-extract/recipes';
+import { atoms } from '../atoms.css';
 
 export const buttonRecipe = recipe({
   variants: {
     kind: {
-      primary: atoms({ background: "blue50" }),
-      secondary: atoms({ background: "yellow" }),
+      primary: atoms({ background: 'blue50' }),
+      secondary: atoms({ background: 'yellow' }),
     },
     size: {
-      md: atoms({ fontSize: "large" }),
-      lg: atoms({ fontSize: "extraLarge" }),
+      md: atoms({ fontSize: 'large' }),
+      lg: atoms({ fontSize: 'extraLarge' }),
     },
   },
 });

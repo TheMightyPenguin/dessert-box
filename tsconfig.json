@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
+    "lib": ["DOM", "ESNext"],
     "jsx": "preserve",
     "strict": true,
     "esModuleInterop": true,
@@ -13,7 +10,5 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true
   },
-  "exclude": [
-    "examples"
-  ]
+  "exclude": ["examples"]
 }
