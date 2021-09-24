@@ -1,0 +1,31 @@
+{
+  "name": "@dessert-box/react",
+  "version": "0.2.0",
+  "description": "",
+  "author": "Victor Tortolero <victormtortolero@gmail.com>",
+  "main": "dist/dessert-box-react.cjs.js",
+  "module": "dist/dessert-box-react.esm.js",
+  "types": "dist/dessert-box-react.cjs.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheMightyPenguin/dessert-box.git",
+    "directory": "packages/react"
+  },
+  "scripts": {
+    "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
+    "emit-types": "tsc --project tsconfig.types.json"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/react": "^17.0.4",
+    "react": "^16.8.0"
+  },
+  "dependencies": {
+    "@dessert-box/core": "^0.1.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  }
+}
