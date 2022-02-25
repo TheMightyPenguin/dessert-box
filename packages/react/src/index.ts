@@ -24,10 +24,7 @@ export function createBox<AtomsFn extends AtomsFnBase>({
 
   const Box = forwardRef<HTMLElement, BoxProps>(
     ({ as: element = 'div', className, ...props }: BoxProps, ref) => {
-      const { hasAtomProps, atomProps, otherProps } = extractAtomsFromProps(
-        props,
-        atomsFn,
-      );
+      const { atomProps, otherProps } = extractAtomsFromProps(props, atomsFn);
 
       return createElement(element, {
         ref,
@@ -40,6 +37,8 @@ export function createBox<AtomsFn extends AtomsFnBase>({
       });
     },
   );
+
+  Box.displayName = 'Box';
 
   return Box;
 }
@@ -70,6 +69,8 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
       });
     },
   );
+
+  Box.displayName = 'Box';
 
   return Box;
 }
