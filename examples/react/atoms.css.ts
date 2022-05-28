@@ -1,5 +1,5 @@
 import { createTheme } from '@vanilla-extract/css';
-import { createAtomicStyles, createAtomsFn } from '@vanilla-extract/sprinkles';
+import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 
 export const [themeClass, vars] = createTheme({
   color: {
@@ -30,7 +30,7 @@ export const [themeClass, vars] = createTheme({
   },
 });
 
-const layoutStyles = createAtomicStyles({
+const layoutStyles = defineProperties({
   conditions: {
     mobile: {},
     tablet: { '@media': 'screen and (min-width: 768px)' },
@@ -57,7 +57,7 @@ const layoutStyles = createAtomicStyles({
   },
 });
 
-const colorStyles = createAtomicStyles({
+const colorStyles = defineProperties({
   properties: {
     color: vars.color,
     background: vars.color,
@@ -65,4 +65,4 @@ const colorStyles = createAtomicStyles({
   },
 });
 
-export const atoms = createAtomsFn(layoutStyles, colorStyles);
+export const atoms = createSprinkles(layoutStyles, colorStyles);
