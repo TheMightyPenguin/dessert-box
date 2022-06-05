@@ -67,7 +67,7 @@ Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`s
 
 ```js
 // atoms.css.ts
-import { createAtomicStyles, createAtomsFn } from '@vanilla-extract/sprinkles';
+import { defineProperties, createSprinkles } from '@vanilla-extract/sprinkles';
 
 const space = {
   none: 0,
@@ -81,7 +81,7 @@ const colors = {
   // ...
 };
 
-const atomicStyles = createAtomicStyles({
+const atomicStyles = defineProperties({
   conditions: {
     mobile: {},
     tablet: { '@media': 'screen and (min-width: 768px)' },
@@ -95,7 +95,7 @@ const atomicStyles = createAtomicStyles({
   // ...
 });
 
-export const atoms = createAtomsFn(atomicStyles);
+export const atoms = createSprinkles(atomicStyles);
 ```
 
 > Check `sprinkles` [docs](https://github.com/seek-oss/vanilla-extract/tree/3360bdfc9220024e7ffa49b3b198b72743d4e264/packages/sprinkles#setup) for more context into how to create these atoms.
