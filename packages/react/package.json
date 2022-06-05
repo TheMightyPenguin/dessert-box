@@ -20,12 +20,12 @@
   "keywords": [],
   "devDependencies": {
     "@types/react": "^17.0.4",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "dependencies": {
     "@dessert-box/core": "^0.1.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   }
 }
