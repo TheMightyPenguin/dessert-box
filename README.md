@@ -44,6 +44,7 @@ const MyComponent = () => {
 
 - [🍰 Dessert Box](#-dessert-box)
   - [Usage](#usage)
+    - [Escape Hatch](#escape-hatch)
     - [Variants](#variants)
   - [API](#api)
     - [createBox(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxoptions--atoms-atomsfn-defaultclassname-string-)
@@ -134,6 +135,18 @@ If you need to render a tag different than a `div`, you can use the `as` prop:
   Link to example
 </Box>
 ```
+
+### Escape Hatch
+
+We have a way of specifying an arbitrary value (non design token) for any of your atoms properties like the following:
+
+```jsx
+<Box padding="small" __margin="42px" __backgroundColor="yellow">
+  Link to example
+</Box>
+```
+
+This is useful for those cases where we need to exit our system to accomplish something.
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 

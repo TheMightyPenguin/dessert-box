@@ -21,9 +21,13 @@ export function extractAtomsFromProps<AtomsFn extends AtomsFnBase>(
   let hasAtomProps = false;
   let atomProps: Record<string, unknown> = {};
   let otherProps: Record<string, unknown> = {};
+  let customProps: Record<string, unknown> = {};
 
   for (const key in props) {
-    if (atomsFn.properties.has(key)) {
+    if (key[0] === '_' && key[1] === '_') {
+      const actualKey = key.substring(2);
+      customProps[actualKey] = props[key];
+    } else if (atomsFn.properties.has(key)) {
       hasAtomProps = true;
       atomProps[key] = props[key];
     } else {
@@ -31,5 +35,5 @@ export function extractAtomsFromProps<AtomsFn extends AtomsFnBase>(
     }
   }
 
-  return { hasAtomProps, atomProps, otherProps };
+  return { hasAtomProps, atomProps, otherProps, customProps };
 }

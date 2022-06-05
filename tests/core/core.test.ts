@@ -64,5 +64,14 @@ describe('@dessert-box/core', () => {
       );
       expect(otherProps).toEqual({ onClick });
     });
+
+    it('customProps should contain props prefixed with "__"', () => {
+      const atoms = createMockAtoms();
+      const { customProps } = extractAtomsFromProps(
+        { padding: 'small', color: 'red', __width: '42px' },
+        atoms,
+      );
+      expect(customProps).toEqual({ _width: '42px' });
+    });
   });
 });

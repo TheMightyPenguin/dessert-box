@@ -11,23 +11,34 @@ type HTMLProperties = Omit<
   'as' | 'color' | 'height' | 'width'
 >;
 
+type OverrideTokens<T> = {
+  [K in keyof T as K extends string ? `__${K}` : number]: any;
+};
+
 export function createBox<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
   defaultClassName,
 }: CreateBoxParams<AtomsFn>) {
+  type Tokens = Parameters<AtomsFn>[0];
   type BoxProps = {
     as?: React.ElementType;
     children?: React.ReactNode;
     className?: string;
-  } & Parameters<AtomsFn>[0] &
+    style?: Record<string, any>;
+  } & Tokens &
+    OverrideTokens<Tokens> &
     HTMLProperties;
 
   const Box = forwardRef<HTMLElement, BoxProps>(
-    ({ as: element = 'div', className, ...props }: BoxProps, ref) => {
-      const { atomProps, otherProps } = extractAtomsFromProps(props, atomsFn);
+    ({ as: element = 'div', className, style, ...props }: BoxProps, ref) => {
+      const { atomProps, customProps, otherProps } = extractAtomsFromProps(
+        props,
+        atomsFn,
+      );
 
       return createElement(element, {
         ref,
+        style: { ...style, ...customProps },
         ...otherProps,
         className: composeClassNames(
           className,
@@ -38,7 +49,7 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     },
   );
 
-  Box.displayName = 'Box';
+  Box.displayName = 'DessertBox';
 
   return Box;
 }
@@ -70,7 +81,7 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     },
   );
 
-  Box.displayName = 'Box';
+  Box.displayName = 'DessertBox';
 
   return Box;
 }
