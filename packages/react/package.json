@@ -1,6 +1,6 @@
 {
   "name": "@dessert-box/react",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "",
   "author": "Victor Tortolero <victormtortolero@gmail.com>",
   "main": "dist/dessert-box-react.cjs.js",
@@ -23,7 +23,7 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@dessert-box/core": "^0.1.0"
+    "@dessert-box/core": "^0.2.0"
   },
   "peerDependencies": {
     "react": ">=16.8.0"
