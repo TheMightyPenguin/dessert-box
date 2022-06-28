@@ -12,7 +12,7 @@ type HTMLProperties = Omit<
 >;
 
 type OverrideTokens<T> = {
-  [K in keyof T as K extends string ? `__${K}` : number]: any;
+  [K in keyof T as K extends string ? `__${K}` : number]: Extract<T[K], string|number> | {};
 };
 
 export function createBox<AtomsFn extends AtomsFnBase>({
