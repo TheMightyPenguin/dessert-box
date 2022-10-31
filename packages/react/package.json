@@ -6,6 +6,10 @@
   "main": "dist/dessert-box-react.cjs.js",
   "module": "dist/dessert-box-react.esm.js",
   "types": "dist/dessert-box-react.cjs.d.ts",
+  "exports": {
+    "require": "./dist/dessert-box-react.cjs.js",
+    "import": "./dist/dessert-box-react.esm.js"
+  },
   "sideEffects": false,
   "license": "MIT",
   "repository": {
