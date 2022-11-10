@@ -12,7 +12,7 @@ const AsBoxButton = (
 ) => <Box as={Button} {...props} />;
 
 export const App = () => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
 
   return (
     <Box className={themeClass}>

@@ -17,19 +17,15 @@
     "url": "https://github.com/TheMightyPenguin/dessert-box.git",
     "directory": "packages/react"
   },
-  "scripts": {
-    "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
-    "emit-types": "tsc --project tsconfig.types.json"
-  },
   "keywords": [],
   "devDependencies": {
     "@types/react": "^17.0.4",
     "react": ">=16.8.0"
   },
-  "dependencies": {
-    "@dessert-box/core": "^0.2.0"
-  },
   "peerDependencies": {
     "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "@dessert-box/core": "workspace:^0.2.0"
   }
 }
