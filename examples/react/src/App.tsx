@@ -61,6 +61,38 @@ export const App = () => {
       >
         With atoms as a prop
       </BoxWithAtomsProp>
+
+      <Box margin={{ desktop: 'extraLarge', tablet: 'large', mobile: 'small' }}>
+        Box with responsive (conditional) margin
+      </Box>
+      <Box
+        _desktop={{ margin: 'extraLarge', padding: 'large' }}
+        _hover={{
+          color: 'blue100',
+          fontSize: 'extraLarge',
+          // escape hatch not working for now
+          // __background: '#000',
+        }}
+      >
+        Box with multiple responsive (reversed conditonal) props
+      </Box>
+      <Box
+        margin="extraLarge"
+        color="blue100"
+        _desktop={{ margin: 'small' }}
+        _hover={{ color: 'yellow' }}
+      >
+        Box with conditional override
+      </Box>
+      <Box
+        margin={{ desktop: 'extraLarge', tablet: 'large', mobile: 'small' }}
+        color="blue100"
+        _desktop={{ margin: 'small' }}
+        // not working cause we need the default condition..
+        // _hover={{ color: 'yellow' }}
+      >
+        Box with conditional override
+      </Box>
     </Box>
   );
 };

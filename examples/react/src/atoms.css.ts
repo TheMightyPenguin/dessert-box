@@ -27,7 +27,7 @@ export const [themeClass, vars] = createTheme({
     medium: '8px',
     large: '16px',
     extraLarge: '32px',
-  },
+  } as const,
 });
 
 const layoutStyles = defineProperties({
@@ -57,12 +57,33 @@ const layoutStyles = defineProperties({
   },
 });
 
-const colorStyles = defineProperties({
+const unresponsiveStyles = defineProperties({
   properties: {
-    color: vars.color,
-    background: vars.color,
+    whiteSpace: ['nowrap', 'normal'],
+    pointerEvents: ['inherit', 'all', 'none'],
+    userSelect: ['inherit', 'none', 'text', 'all'],
     // etc.
   },
 });
 
-export const atoms = createSprinkles(layoutStyles, colorStyles);
+const colorStyles = defineProperties({
+  conditions: {
+    default: {},
+    focus: { selector: '&:focus' },
+    hover: { selector: '&:hover' },
+  },
+  defaultCondition: 'default',
+  properties: {
+    color: vars.color,
+    background: vars.color,
+    fontSize: vars.fontSize,
+    // etc.
+  },
+});
+
+export const atoms = createSprinkles(
+  layoutStyles,
+  colorStyles,
+  unresponsiveStyles,
+);
+// console.log('yes', Object.keys(atoms));
