@@ -1,6 +1,6 @@
 {
   "name": "@dessert-box/react",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "",
   "author": "Victor Tortolero <victormtortolero@gmail.com>",
   "main": "dist/dessert-box-react.cjs.js",
