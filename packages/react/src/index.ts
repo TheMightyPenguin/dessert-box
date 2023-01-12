@@ -1,42 +1,68 @@
-import React, { createElement, forwardRef } from 'react';
 import {
   AtomsFnBase,
-  extractAtomsFromProps,
   composeClassNames,
+  extractAtomsFromProps,
 } from '@dessert-box/core';
+import React, {
+  createElement,
+  ForwardedRef,
+  forwardRef,
+  ReactElement,
+} from 'react';
 import type { CreateBoxParams } from './types';
 
-type HTMLProperties = Omit<
-  React.AllHTMLAttributes<HTMLElement>,
-  'as' | 'color' | 'height' | 'width'
->;
+// adapted from https://github.com/kripod/react-polymorphic-box
+type AsProp<TType extends React.ElementType = React.ElementType> = {
+  as?: TType;
+};
+type BaseBoxProps<TType extends React.ElementType> = AsProp<TType> &
+  Omit<React.ComponentProps<TType>, keyof AsProp>;
+
+type PolymorphicComponentProps<TType extends React.ElementType, Props> = Props &
+  BaseBoxProps<TType>;
+
+type PolymorphicComponent<
+  Props,
+  DefaultType extends React.ElementType = 'div',
+> = <TType extends React.ElementType = DefaultType>(
+  props: PolymorphicComponentProps<TType, Props>,
+) => React.ReactElement | null;
+//
 
 type OverrideTokens<T> = {
-  [K in keyof T as K extends string ? `__${K}` : number]: Extract<T[K], string|number> | {};
+  [K in keyof T as K extends string ? `__${K}` : number]:
+    | Extract<T[K], string | number>
+    | {};
 };
 
+type Tokens<AtomsFn extends AtomsFnBase> = Parameters<AtomsFn>[0];
+type BoxProps<
+  AtomsFn extends AtomsFnBase,
+  TType extends React.ElementType,
+> = PolymorphicComponentProps<
+  TType,
+  Tokens<AtomsFn> & OverrideTokens<Tokens<AtomsFn>>
+>;
+
+const defaultElement = 'div';
 export function createBox<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
   defaultClassName,
 }: CreateBoxParams<AtomsFn>) {
-  type Tokens = Parameters<AtomsFn>[0];
-  type BoxProps = {
-    as?: React.ElementType;
-    children?: React.ReactNode;
-    className?: string;
-    style?: Record<string, any>;
-  } & Tokens &
-    OverrideTokens<Tokens> &
-    HTMLProperties;
-
-  const Box = forwardRef<HTMLElement, BoxProps>(
-    ({ as: element = 'div', className, style, ...props }: BoxProps, ref) => {
+  const Box: <TType extends React.ElementType = typeof defaultElement>(
+    props: BoxProps<AtomsFn, TType>,
+  ) => null | ReactElement<BoxProps<AtomsFn, TType>> = forwardRef(
+    <TType extends React.ElementType = typeof defaultElement>(
+      { className, style, ...props }: BoxProps<AtomsFn, TType>,
+      ref: ForwardedRef<PolymorphicComponent<BoxProps<AtomsFn, TType>, TType>>,
+    ) => {
+      const Element = props.as || defaultElement;
       const { atomProps, customProps, otherProps } = extractAtomsFromProps(
         props,
         atomsFn,
       );
 
-      return createElement(element, {
+      return createElement(Element, {
         ref,
         style: { ...style, ...customProps },
         ...otherProps,
@@ -49,27 +75,35 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     },
   );
 
-  Box.displayName = 'DessertBox';
+  (Box as any).displayName = 'DessertBox';
 
   return Box;
 }
+
+type BoxWithAtomsProps<
+  AtomsFn extends AtomsFnBase,
+  TType extends React.ElementType,
+> = PolymorphicComponentProps<
+  TType,
+  { atoms?: Tokens<AtomsFn> & OverrideTokens<Tokens<AtomsFn>> }
+>;
 
 export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
   defaultClassName,
 }: CreateBoxParams<AtomsFn>) {
-  type BoxProps = {
-    as?: React.ElementType;
-    children?: React.ReactNode;
-    className?: string;
-    atoms?: Parameters<AtomsFn>[0];
-  } & HTMLProperties;
+  const Box: <TType extends React.ElementType = typeof defaultElement>(
+    props: BoxWithAtomsProps<AtomsFn, TType>,
+  ) => null | ReactElement = forwardRef(
+    <TType extends React.ElementType = typeof defaultElement>(
+      { className, style, atoms, ...props }: BoxWithAtomsProps<AtomsFn, TType>,
+      ref: ForwardedRef<
+        PolymorphicComponent<BoxWithAtomsProps<AtomsFn, TType>, TType>
+      >,
+    ) => {
+      const Element = props.as || defaultElement;
 
-  const Box = forwardRef<HTMLElement, BoxProps>(
-    ({ as: element = 'div', className, atoms, ...props }, ref) => {
-      const hasAtomProps = typeof atoms !== 'undefined';
-
-      return createElement(element, {
+      return createElement(Element, {
         ref,
         ...props,
         className: composeClassNames(
@@ -81,7 +115,7 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     },
   );
 
-  Box.displayName = 'DessertBox';
+  (Box as any).displayName = 'DessertBox';
 
   return Box;
 }
