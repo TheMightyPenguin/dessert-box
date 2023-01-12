@@ -8,11 +8,11 @@
     "dev": "preconstruct dev",
     "watch": "preconstruct watch",
     "build": "preconstruct build",
-    "release": "yarn build && npm publish",
+    "release": "pnpm build && npm publish",
     "test": "jest",
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    "postinstall": "yarn dev"
+    "postinstall": "pnpm dev"
   },
   "workspaces": [
     "packages/*",

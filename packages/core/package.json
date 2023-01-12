@@ -13,9 +13,5 @@
     "url": "https://github.com/TheMightyPenguin/dessert-box.git",
     "directory": "packages/core"
   },
-  "scripts": {
-    "build": "rm -rf dist && node scripts/build.js && npm run emit-types",
-    "emit-types": "tsc --project tsconfig.types.json"
-  },
   "keywords": []
 }
