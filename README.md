@@ -15,7 +15,7 @@ It works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract])
 import { createBox } from '@dessert-box/react';
 import { atoms } from './sprinkles.css';
 
-const { Box } = createBox({
+const Box = createBox({
   atoms,
   // optional: pass your CSS reset className here
   // useful if you want to scope your reset to your Box element
@@ -108,7 +108,7 @@ Now let's create our `<Box />` using these atoms:
 import { createBox } from '@dessert-box/react';
 import { atoms } from './sprinkles.css';
 
-const { Box } = createBox({ atoms });
+const Box = createBox({ atoms });
 
 export default Box;
 ```
