@@ -1,0 +1,4 @@
+{
+  "main": "dist/dessert-box-react-styledRuntime.cjs.js",
+  "module": "dist/dessert-box-react-styledRuntime.esm.js"
+}

@@ -1,8 +1,59 @@
 # 🍰 Dessert Box
 
-A library to easily consume your design tokens from a React component, meant to be used with [vanilla-extract][vanilla-extract].
+A set of utilities to build UI and components with [vanilla-extract][vanilla-extract].
 
-This library will make consuming your [sprinkles][sprinkles] from a react component a breeze. It provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
+
+- [🍰 Dessert Box](#-dessert-box)
+  - [Installation](#installation)
+  - [Styled](#styled)
+  - [Box](#box)
+    - [Usage](#usage)
+    - [Escape Hatch](#escape-hatch)
+    - [Variants](#variants)
+  - [API](#api)
+    - [createBox(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxoptions--atoms-atomsfn-defaultclassname-string-)
+    - [createBoxWithAtomsProp(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxwithatomspropoptions--atoms-atomsfn-defaultclassname-string-)
+  - [Running the example app](#running-the-example-app)
+  - [How does it work?](#how-does-it-work)
+  - [Thanks](#thanks)
+  - [FAQ](#faq)
+
+## Installation
+
+:warning: If you are not familiar with [vanilla-extract][vanilla-extract], we recommend going trough their docs first and have a working setup before trying any of the dessert box packages.
+
+```sh
+$ npm install @dessert-box/react
+```
+
+## Styled
+
+A `styled-components`-like API to create components in your `*.css.ts` files. To use this, you can define your components
+
+```ts
+// styledComponents.css.ts
+import { styled } from '@dessert-box/react';
+
+export const StyledHeadline = styled('h1', {
+  color: 'white',
+  fontSize: '16px',
+  fontWeight: 'bold
+});
+```
+
+```ts
+import { StyledHeadline } from './styledComponents.css.ts';
+
+function App() {
+  return (
+    <StyledHeadline>I have 0 runtime styles 🤯</StyledHeadline>
+  )
+}
+```
+
+## Box
+
+A box component that will make consuming your [sprinkles][sprinkles] from a breeze. It provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
@@ -42,21 +93,9 @@ const MyComponent = () => {
 
 ![dessert-box](https://img.shields.io/bundlephobia/minzip/dessert-box.svg)
 
-- [🍰 Dessert Box](#-dessert-box)
-  - [Usage](#usage)
-    - [Escape Hatch](#escape-hatch)
-    - [Variants](#variants)
-  - [API](#api)
-    - [createBox(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxoptions--atoms-atomsfn-defaultclassname-string-)
-    - [createBoxWithAtomsProp(options: { atoms: AtomsFn, defaultClassName?: string })](#createboxwithatomspropoptions--atoms-atomsfn-defaultclassname-string-)
-  - [Running the example app](#running-the-example-app)
-  - [How does it work?](#how-does-it-work)
-  - [Thanks](#thanks)
-  - [FAQ](#faq)
-
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
-## Usage
+### Usage
 
 Install the package:
 

@@ -11,6 +11,8 @@ import React, {
 } from 'react';
 import type { CreateBoxParams } from './types';
 
+export { styled } from './styled';
+
 // adapted from https://github.com/kripod/react-polymorphic-box
 type AsProp<TType extends React.ElementType = React.ElementType> = {
   as?: TType;

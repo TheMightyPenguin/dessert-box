@@ -4,6 +4,7 @@ import { themeClass, atoms } from './atoms.css';
 import Box from './Box';
 import Text from './Text/Text';
 import Button from './Button/Button';
+import { StyledText, StyledLink } from './styled.css';
 
 const BoxWithAtomsProp = createBoxWithAtomsProp({ atoms });
 
@@ -16,6 +17,8 @@ export const App = () => {
 
   return (
     <Box className={themeClass}>
+      <StyledText>Styled text</StyledText>
+      <StyledLink href="https://example.com">Link</StyledLink>
       <AsBoxButton background="yellow" padding="extraLarge">
         Hello
       </AsBoxButton>
