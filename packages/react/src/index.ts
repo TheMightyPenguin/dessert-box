@@ -55,11 +55,11 @@ export function createBox<AtomsFn extends AtomsFnBase>({
     props: BoxProps<AtomsFn, TType>,
   ) => null | ReactElement<BoxProps<AtomsFn, TType>> = forwardRef(
     <TType extends React.ElementType = typeof defaultElement>(
-      { className, style, ...props }: BoxProps<AtomsFn, TType>,
+      { className, style, as, ...props }: BoxProps<AtomsFn, TType>,
       ref: ForwardedRef<PolymorphicComponent<BoxProps<AtomsFn, TType>, TType>>,
-    ) => {
-      const Element = props.as || defaultElement;
-      const { atomProps, customProps, otherProps } = extractAtomsFromProps(
+    ) => 
+      const Element = as || defaultElement;
+      const { atomProps, customProps, otherProps: { as, otherProps } } = extractAtomsFromProps(
         props,
         atomsFn,
       );
@@ -98,12 +98,12 @@ export function createBoxWithAtomsProp<AtomsFn extends AtomsFnBase>({
     props: BoxWithAtomsProps<AtomsFn, TType>,
   ) => null | ReactElement = forwardRef(
     <TType extends React.ElementType = typeof defaultElement>(
-      { className, style, atoms, ...props }: BoxWithAtomsProps<AtomsFn, TType>,
+      { className, style, atoms, as, ...props }: BoxWithAtomsProps<AtomsFn, TType>,
       ref: ForwardedRef<
         PolymorphicComponent<BoxWithAtomsProps<AtomsFn, TType>, TType>
       >,
     ) => {
-      const Element = props.as || defaultElement;
+      const Element = as || defaultElement;
 
       return createElement(Element, {
         ref,
