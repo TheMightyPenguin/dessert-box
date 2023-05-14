@@ -9,11 +9,11 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "require": "./dist/dessert-box-react.cjs.js",
-      "import": "./dist/dessert-box-react.esm.js"
+      "default": "./dist/dessert-box-react.cjs.js",
+      "module": "./dist/dessert-box-react.esm.js"
     },
     "./styledRuntime": {
-      "main": "./styledRuntime/dist/dessert-box-react-styledRuntime.cjs.js",
+      "default": "./styledRuntime/dist/dessert-box-react-styledRuntime.cjs.js",
       "module": "./styledRuntime/dist/dessert-box-react-styledRuntime.esm.js"
     }
   },

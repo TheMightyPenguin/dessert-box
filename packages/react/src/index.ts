@@ -47,6 +47,7 @@ type BoxProps<
 >;
 
 const defaultElement = 'div';
+
 export function createBox<AtomsFn extends AtomsFnBase>({
   atoms: atomsFn,
   defaultClassName,
