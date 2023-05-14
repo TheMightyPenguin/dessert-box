@@ -13,8 +13,8 @@
       "import": "./dist/dessert-box-react.esm.js"
     },
     "./styledRuntime": {
-      "main": "./styledRuntime/dist/dessert-box-react-styledRuntime.cjs.js",
-      "module": "./styledRuntime/dist/dessert-box-react-styledRuntime.esm.js"
+      "require": "./styledRuntime/dist/dessert-box-react-styledRuntime.cjs.js",
+      "import": "./styledRuntime/dist/dessert-box-react-styledRuntime.esm.js"
     }
   },
   "preconstruct": {
