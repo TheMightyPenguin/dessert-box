@@ -1,8 +1,8 @@
 # 🍰 Dessert Box
 
-A library to easily consume your design tokens from a React component, meant to be used with [vanilla-extract][vanilla-extract].
+A library to easily consume your design tokens from a Solid component, meant to be used with [vanilla-extract][vanilla-extract].
 
-This library will make consuming your [sprinkles][sprinkles] from a react component a breeze. It provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
+This library will make consuming your [sprinkles][sprinkles] from a Solid component a breeze. It provides a zero-CSS-runtime `<Box />` component (similar to the one in [Braid](https://seek-oss.github.io/braid-design-system/components/Box) or [Chakra](https://chakra-ui.com/docs/layout/box)).
 
 [Try it on CodeSandbox!](https://codesandbox.io/s/dessert-box-demo-wxgy8?file=/src/App.tsx)
 
@@ -12,7 +12,7 @@ It works by consuming `atoms` created with [`vanilla-extract`][vanilla-extract])
 
 ```tsx
 // Box.tsx
-import { createBox } from '@dessert-box/react';
+import { createBox } from '@dessert-box/solid';
 import { atoms } from './sprinkles.css';
 
 const { Box } = createBox({
@@ -60,7 +60,7 @@ const MyComponent = () => {
 Install the package:
 
 ```
-$ npm install @dessert-box/react
+$ npm install @dessert-box/solid
 ```
 
 Configure [vanilla-extract](https://github.com/seek-oss/vanilla-extract) and [`sprinkles`](https://github.com/seek-oss/vanilla-extract/tree/master/packages/sprinkles) and have your atoms ready:
@@ -104,7 +104,7 @@ Now let's create our `<Box />` using these atoms:
 
 ```tsx
 // Box.ts
-import { createBox } from '@dessert-box/react';
+import { createBox } from '@dessert-box/solid';
 import { atoms } from './sprinkles.css';
 
 const { Box } = createBox({ atoms });
@@ -171,10 +171,11 @@ export type ButtonVariants = Parameters<typeof buttonRecipe>[0];
 ```tsx
 // Button.tsx
 import { Box } from './Box';
+import type { ParentProps } from "solid-js"
 import { buttonRecipe, ButtonVariants } from './Button.css';
 
 type Props = {
-  children: React.ReactNode;
+  children: ParentProps;
 } & ButtonVariants;
 
 export const Button = ({
@@ -201,7 +202,7 @@ For more context, refer to [@vanilla-extract/recipe][recipes] or feel free [to o
 Creates a `<Box />` component that takes atoms at the root level.
 
 ```jsx
-import { createBox } from '@dessert-box/react';
+import { createBox } from '@dessert-box/solid';
 import { atoms } from './atoms.css';
 
 const Box = createBox({ atoms });
@@ -214,7 +215,7 @@ const Box = createBox({ atoms });
 Creates a `<Box />` component that takes atoms as a prop called `atoms`.
 
 ```jsx
-import { createBoxWithAtomsProp } from '@dessert-box/react';
+import { createBoxWithAtomsProp } from '@dessert-box/solid';
 import { atoms } from './atoms.css';
 
 const Box = createBoxWithAtomsProp({ atoms });
