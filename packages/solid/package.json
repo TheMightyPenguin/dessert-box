@@ -1,20 +1,20 @@
 {
-  "name": "@dessert-box/react",
+  "name": "@dessert-box/solid",
   "version": "0.7.5",
   "description": "",
   "author": "Victor Tortolero <victormtortolero@gmail.com>",
-  "main": "dist/dessert-box-react.cjs.js",
-  "module": "dist/dessert-box-react.esm.js",
-  "types": "dist/dessert-box-react.cjs.d.ts",
+  "main": "dist/dessert-box-solid.cjs.js",
+  "module": "dist/dessert-box-solid.esm.js",
+  "types": "dist/dessert-box-solid.cjs.d.ts",
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "module": "./dist/dessert-box-react.esm.js",
-      "default": "./dist/dessert-box-react.cjs.js"
+      "module": "./dist/dessert-box-solid.esm.js",
+      "default": "./dist/dessert-box-solid.cjs.js"
     },
     "./styledRuntime": {
-      "module": "./styledRuntime/dist/dessert-box-react-styledRuntime.esm.js",
-      "default": "./styledRuntime/dist/dessert-box-react-styledRuntime.cjs.js"
+      "module": "./styledRuntime/dist/dessert-box-solid-styledRuntime.esm.js",
+      "default": "./styledRuntime/dist/dessert-box-solid-styledRuntime.cjs.js"
     }
   },
   "files": [
@@ -23,8 +23,8 @@
   ],
   "preconstruct": {
     "entrypoints": [
-      "index.ts",
-      "styledRuntime.ts"
+      "index.tsx",
+      "styledRuntime.tsx"
     ]
   },
   "sideEffects": false,
@@ -32,18 +32,16 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/TheMightyPenguin/dessert-box.git",
-    "directory": "packages/react"
+    "directory": "packages/solid"
   },
   "keywords": [],
   "devDependencies": {
-    "@types/react": "^17.0.4",
-    "@babel/preset-react": "^7.14.5",
     "@vanilla-extract/css": "^1.11.0",
-    "react": ">=16.8.0"
+    "babel-preset-solid": "^1.7.7"
   },
   "peerDependencies": {
     "@vanilla-extract/css": ">=1.11.0",
-    "react": ">=16.8.0"
+    "solid-js": "^1.7.8"
   },
   "dependencies": {
     "@dessert-box/core": "workspace:0.2.0"

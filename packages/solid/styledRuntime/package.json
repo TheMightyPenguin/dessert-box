@@ -1,0 +1,4 @@
+{
+  "main": "dist/dessert-box-solid-styledRuntime.cjs.js",
+  "module": "dist/dessert-box-solid-styledRuntime.esm.js"
+}

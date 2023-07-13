@@ -13,5 +13,8 @@
     "url": "https://github.com/TheMightyPenguin/dessert-box.git",
     "directory": "packages/core"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "solid-js": "^1.7.8"
+  }
 }
